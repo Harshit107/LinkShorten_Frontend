@@ -1,0 +1,1 @@
+// This is a auth page and responsible for the authentication redirect
