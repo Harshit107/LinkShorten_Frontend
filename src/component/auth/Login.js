@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import styles from "./Login.module.css";
+import styles from "./Auth.module.css";
+import Input from "../../utils/common/Input";
 
 export const Login = (props) => {
   const [email, setEmail] = useState();
@@ -14,29 +15,20 @@ export const Login = (props) => {
     <div className={styles["form-container"]}>
       <h2>Login</h2>
       <form onSubmit={submitFormHandler} className={styles["login-form"]}>
-        <label htmlFor="email">Your email</label>
-        <input
-          type="email"
-          placeholder="someone@example.com"
-          id="email"
-          name="email"
+        <Input
+          label={"Your email"}
+          id={"email"}
+          placeholder={"someone@example.com"}
           value={email}
-          onChange={(e) => {
-            setEmail(e.target.value);
-          }}
-        ></input>
-
-        <label htmlFor="password">Your password</label>
-        <input
-          type="password"
-          id="password"
-          name="password"
-          placeholder="**********"
+          onValueChanged={(val) => setEmail(val)}
+        />
+        <Input
+          label={"Your password"}
+          id={"password"}
+          placeholder={"**********"}
           value={password}
-          onChange={(e) => {
-            setPassword(e.target.value);
-          }}
-        ></input>
+          onValueChanged={(val) => setPassword(val)}
+        />
 
         <button type="submit">Log In</button>
       </form>

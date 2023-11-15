@@ -1,0 +1,25 @@
+.form-container,
+.login-form,
+.register-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-container {
+  padding: 4rem;
+  border: 2px solid rgb(245, 215, 215);
+  border-radius: 15px;
+  margin: 0.5rem;
+}
+
+.link-btn {
+  background: none;
+  text-decoration: underline;
+  color: white;
+}
+.link-btn:hover,
+.link-btn:active {
+  box-shadow: 10px 10px rgba(0, 0, 0, 0.05);
+  transition: box-shadow 0.5s;
+  color: whitesmoke;
+}
