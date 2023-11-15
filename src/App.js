@@ -1,9 +1,10 @@
+import Index from "./component/auth/Index";
 
 function App() {
   return (
-    <div >
-      <h1>Welcome to Linkify</h1>
-    </div>
+    <>
+      <Index />
+    </>
   );
 }
 
