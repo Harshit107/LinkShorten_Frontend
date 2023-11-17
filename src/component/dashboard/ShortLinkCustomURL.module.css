@@ -1,0 +1,26 @@
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.inputContainerClass {
+    width: 45%;
+}
+.divider {
+    font-size: 25px;
+    margin-top: 20px;
+    font-weight: 600;
+}
+
+.domains {
+    background-color: rgb(255, 255, 255);
+    outline: none;
+    cursor: pointer;
+}
+
+.error {
+    border: 1px solid rgb(236, 43, 43);
+    color: red;
+}

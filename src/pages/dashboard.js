@@ -1,10 +1,8 @@
 import React from 'react'
+import DashboardIndex from '../component/dashboard/DashboardIndex'
 
 export default function Dashboard() {
   return (
-    <div>
-        <h1>This is Dashboard</h1>
-        <button >Hello</button>
-    </div>
+    <DashboardIndex />
   )
 }

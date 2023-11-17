@@ -1,16 +1,25 @@
-label {
+.inputContainer{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.label {
   text-align: left;
   padding: 0.25rem 0;
 }
 
-input {
+.input {
+  width: 100%;
   margin: 0.5rem 0;
   padding: 1rem;
   border-radius: 10px;
   border: none;
+  display: block;
+  outline: none;
 }
 
-button {
+/* button {
   border: none;
   background-color: white;
   padding: 20px;
@@ -24,4 +33,4 @@ button:active {
   box-shadow: 10px 10px rgba(100, 100, 100, 0.1);
   transition: box-shadow 0.5s;
   color: rgba(128, 128, 128, 0.5);
-}
+} */

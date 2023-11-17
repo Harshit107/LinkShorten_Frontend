@@ -1,0 +1,11 @@
+.main-container {
+    width: 100%;
+    height: calc(100% - 85px);
+    background-image: url('../../image/home-bg.jpg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}

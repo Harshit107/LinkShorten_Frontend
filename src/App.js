@@ -1,25 +1,19 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Root from "./pages/Root";
 import Dashboard from "./pages/dashboard";
-import Homepage from "./pages/homepage";
 import Auth from "./pages/auth";
+import Api from "./pages/api";
+import Analytics from "./pages/analytics";
 
 const router = createBrowserRouter([
   {
-    path: '/',
-    element: <Homepage />,
-  },
-  {
-    path: '/dashboard',
-    element: <Root />,
-    children: [
-      { path: '', index: true, element: <Dashboard /> }
+    path: '/', element: <Root />, children: [
+      { path: 'dashboard', element: <Dashboard /> },
+      { path: 'api', element: <Api /> },
+      { path: 'analytics', element: <Analytics /> },
     ]
   },
-  {
-    path: '/auth',
-    element: <Auth />
-  },
+  { path: '/auth', element: <Auth /> },
 
 ])
 function App() {

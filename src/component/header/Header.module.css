@@ -1,15 +1,19 @@
 header {
     width: 100%;
-    height: 90px;
+    height: 85px;
     background-color: var(--bg-1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+
 }
+
 .mainNav {
     width: 100%;
     height: 100%;
     display: flex;
     justify-content: space-between;
-    align-items: center;
-
+    align-items: center;    
 }
 
 .division {
@@ -17,7 +21,8 @@ header {
     justify-content: space-between;
     align-items: center;
     gap: 20px;
-    margin: 0 40px;;
+    margin: 0 40px;
+    
 }
 
 .active {
@@ -40,6 +45,7 @@ header {
     85% {
         rotate: 0deg;
     }
+
     100% {
         rotate: 360deg;
     }

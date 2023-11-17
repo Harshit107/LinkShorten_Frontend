@@ -5,7 +5,6 @@ const defaultData = {
 export const initialize = () => {
     const storedData = localStorage.getItem('data');
     if (!storedData) {
-        console.log(storedData);
         setDataToLocalStorage((defaultData));
     }
 }
@@ -24,7 +23,6 @@ export const setDataToLocalStorage = (data) => {
         else
             data.token = ""
     }
-    console.log(data)
     return window.localStorage.setItem('data', JSON.stringify(data))
 }
 

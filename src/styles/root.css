@@ -1,8 +1,11 @@
 :root {
     --bg-1: #0d1e25;
+    --text-0: rgb(109, 163, 8);
     --text-1: rgb(145, 223, 0);
     --text-2: rgb(190, 243, 90);
     --text-3: rgb(213, 243, 157);
+    
+    --heading-1: rgb(93, 151, 238);
 }
 
 * {
@@ -17,4 +20,15 @@ a {
 
 a:hover {
    color: var(--text-1);
+}
+
+.special {
+ color: var(--text-1);   
+}
+
+.size-20  {
+    font-size: 20px;
+}
+.bold {
+    font-weight: bold;
 }

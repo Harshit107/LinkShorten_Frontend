@@ -4,6 +4,6 @@ import classes from './Button.module.css'
 export default function Button(props) {
     const className = `${classes.button} ${props.className || ''}`
     return (
-        <button className={className} {...props.action}>{props.name}</button>
+        <button  {...props.action} className={className}>{props.name}</button>
     )
 }

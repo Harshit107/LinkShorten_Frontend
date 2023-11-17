@@ -1,0 +1,62 @@
+.container {
+    width: 80%;
+    max-width: 1170px;
+    background-color: rgba(239, 239, 239, 0.74);
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: rgb(176, 174, 174) 0px 0px 15px;
+    margin-top: 30px;
+}
+
+.enlight {
+    background-color: rgba(204, 232, 240, 0.774);
+    border-radius: 7px;
+    text-align: center;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.enlight p {
+    margin: 5px;
+    padding: 5px;
+
+}
+.party {
+    width: 30px;
+    height: 30px;
+    margin-left: 20px;
+}
+
+
+.input {
+    width: 100%;
+}
+
+
+
+.shortLink {
+    background-color: rgb(240, 240, 240);
+}
+
+.create {
+    width: 200px;
+    height: 40px;
+    margin-top: 30px;
+    background-color: var(--text-1);
+}
+
+.free {
+    font-size: 20px;
+    font-weight: 500px;
+    text-align: center;
+}
+
+.free span {
+    color: var(--heading-1);
+    font-size: 20px;
+    font-weight: bold;
+
+}
