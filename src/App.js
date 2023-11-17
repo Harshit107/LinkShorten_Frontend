@@ -1,9 +1,25 @@
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import Root from "./pages/Root";
+import Dashboard from "./pages/dashboard";
+import Homepage from "./pages/homepage";
 
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <Homepage />,
+  },
+  {
+    path: '/dashboard',
+    element: <Root />,
+    children: [
+      { path: '',index:true, element: <Dashboard /> }
+    ]
+  },
+
+])
 function App() {
   return (
-    <div >
-      <h1>Welcome to Linkify</h1>
-    </div>
+    <RouterProvider router={router} />
   );
 }
 
