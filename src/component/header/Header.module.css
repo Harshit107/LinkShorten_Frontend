@@ -1,8 +1,46 @@
 header {
     width: 100%;
-    height: 150px;
+    height: 90px;
+    background-color: var(--bg-1);
+}
+.mainNav {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
 }
 
-.active{
-    color: rgb(166, 255, 0);
+.division {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    margin: 0 40px;;
+}
+
+.active {
+    color: var(--text-2)
+}
+
+.circle {
+    width: 60px;
+    height: 60px;
+}
+
+.logo {
+    width: 70%;
+    height: 70%;
+    animation: rotate 10s infinite;
+}
+
+
+@keyframes rotate {
+    85% {
+        rotate: 0deg;
+    }
+    100% {
+        rotate: 360deg;
+    }
 }

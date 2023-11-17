@@ -1,0 +1,11 @@
+.circle {
+    min-width : 40px;
+    min-height : 40px;
+    border-radius: 50%;
+    background-color: var(--logo-color);
+    overflow: hidden;
+    border: 1px solid white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

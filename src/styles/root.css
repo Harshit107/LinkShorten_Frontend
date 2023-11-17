@@ -1,0 +1,20 @@
+:root {
+    --bg-1: #0d1e25;
+    --text-1: rgb(145, 223, 0);
+    --text-2: rgb(190, 243, 90);
+    --text-3: rgb(213, 243, 157);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+a:hover {
+   color: var(--text-1);
+}
