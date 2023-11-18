@@ -1,0 +1,16 @@
+.footer {
+  height: 100px;
+  background-color : var(--bg-1);
+  width : 100%;
+  color : white;
+  margin-top : 50px;
+}
+.made-with-love {
+  font-size: 12px;
+  text-align : center;
+}
+.heart {
+  font-style: normal;
+  font-weight: 500;
+  color: #c0392b;
+}

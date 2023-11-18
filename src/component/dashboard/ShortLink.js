@@ -22,7 +22,7 @@ export default function ShortLink() {
       />
       <ShortLinkCustomURL />
       <div className={classes.enlight}>
-        <img src={PARTY} className={classes.party} />
+        <img src={PARTY} className={classes.party} alt='' />
         <p >End your link with words that will make it unique</p>
       </div >
 
