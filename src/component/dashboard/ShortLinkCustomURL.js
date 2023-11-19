@@ -18,7 +18,6 @@ export default function ShortLinkCustomURL() {
     const handleDomainChange = (e) => {
         const searching = e.target.value;
         const searchedDomain = availableDomains.filter(domain => domain.toLowerCase().includes(searching.toLowerCase()))
-        console.log(searchedDomain);
         if (searchedDomain.length <= 0) {
             if (!domainError)
                 setDomainError(true);

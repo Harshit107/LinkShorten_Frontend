@@ -1,0 +1,16 @@
+.qrcode-container {
+    width: 150px;
+    height: 150px;
+    display: relative;
+    z-index: 2;
+}   
+
+#react-qrcode-logo {
+    width: 150px !important;
+    height: 150px !important;
+    border-radius: 20px;
+    
+}
+.blur {
+    filter: blur(2px);
+}

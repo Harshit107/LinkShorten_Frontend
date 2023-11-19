@@ -1,11 +1,11 @@
 .container {
     width: 80%;
     max-width: 1170px;
-    background-color: rgba(239, 239, 239, 0.74);
+    background-color: var(--bg-white-1);
     padding: 20px;
     border-radius: 5px;
-    box-shadow: rgb(176, 174, 174) 0px 0px 15px;
-    margin-top: 30px;
+    /* box-shadow: rgb(176, 174, 174) 0px 0px 15px; */
+    border: 1.5px solid #ccc;
 }
 
 .enlight {

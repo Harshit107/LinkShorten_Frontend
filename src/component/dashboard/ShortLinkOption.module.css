@@ -1,0 +1,43 @@
+.container {
+    height : 60px;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+.content {
+    width : fit-content;
+    display: flex;;
+    flex-direction: row;;
+
+}
+.options {
+    padding: 10px 15px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    z-index: 5;
+    align-items: center;
+    text-align: center;
+    transition: 0.2s ease;
+    cursor: pointer;
+
+}
+.options.active {
+    border-top: 1.5px solid rgba(176, 174, 174, 0.432);
+    border-left: 1.5px solid rgb(206, 202, 202);
+    border-right: 1.5px solid rgb(216, 214, 214);
+    background-color: var(--bg-white-1);
+    margin-bottom: -1.5px;
+    position: relative;
+
+}
+.options:not(.active):hover {
+   
+    background-color: var(--bg-white-10);
+    margin-bottom: -1.5px;
+    position: relative;
+    color : var(--heading-1)
+}
+
+.title {
+    margin-left: 5px;
+}

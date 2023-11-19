@@ -1,0 +1,25 @@
+.QRsection{ 
+    display: flex;
+    margin-top: 20px;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--heading-10);
+    padding: 10px;
+    border-radius: 10px;
+    padding-right: 50px;
+}
+
+.description {
+    padding: 5px;;
+    width: 65%;
+}
+.heading {
+    color: var(--heading-0);
+    margin: 2px;
+    
+}
+.title {
+    padding: 0px;
+    margin: 0px;
+    color: var(--heading-1)
+}

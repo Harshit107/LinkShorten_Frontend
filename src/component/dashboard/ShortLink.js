@@ -15,7 +15,7 @@ export default function ShortLink() {
       <Input
         label={"Paste a long URL"}
         id={"longLink"}
-        placeholder={"Example : https://super-ling-link.com/shorten-it"}
+        placeholder={"Example : https://super-long-link.com/shorten-it"}
         value={longLink}
         onChange={(e) => setLongLink(e.target.value)}
         className={classes.input}
