@@ -13,9 +13,9 @@ const router = createBrowserRouter([
       { path: "dashboard", element: <Dashboard /> },
       { path: "api", element: <Api /> },
       { path: "analytics", element: <Analytics /> },
-      { path: "auth", element: <Auth /> },
     ],
   },
+  { path: "/auth", element: <Auth /> },
 ]);
 function App() {
   return <RouterProvider router={router} />;
