@@ -18,11 +18,12 @@
   text-decoration: underline;
   color: white;
   height: 30px;
-
 }
 .link-btn:hover,
 .link-btn:active {
-  box-shadow: 10px 10px rgba(0, 0, 0, 0.05);
-  transition: box-shadow 0.5s;
-  color: whitesmoke;
+  color: rgb(86, 86, 245);
+}
+
+.active {
+  color: var(--text-2);
 }

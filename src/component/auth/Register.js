@@ -1,8 +1,11 @@
 import { useState } from "react";
 import styles from "./Auth.module.css";
 import Input from "../../utils/common/Input";
+import Button from "../../utils/common/Button";
+import { useNavigate } from "react-router-dom";
 
 export const Register = (props) => {
+  const navigate = useNavigate();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [name, setName] = useState();
@@ -10,6 +13,7 @@ export const Register = (props) => {
   const submitFormHandler = (event) => {
     event.preventDefault();
     console.log(name, email, password);
+    navigate("/");
   };
   return (
     <div className={styles["form-container"]}>
@@ -37,14 +41,20 @@ export const Register = (props) => {
           onValueChanged={(val) => setPassword(val)}
         />
 
-        <button type="submit">Register</button>
+        <Button
+          type="submit"
+          action={{ onClick: submitFormHandler }}
+          name="Register"
+        >
+          Register
+        </Button>
       </form>
-      <button
+      <p
         className={styles["link-btn"]}
         onClick={() => props.onFormSubmission("login")}
       >
         Already have an account? Login here!
-      </button>
+      </p>
     </div>
   );
 };

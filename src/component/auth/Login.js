@@ -2,28 +2,31 @@ import React, { useState } from "react";
 import styles from "./Auth.module.css";
 import Input from "../../utils/common/Input";
 import Button from "../../utils/common/Button";
+import { useNavigate } from "react-router-dom";
 
 export const Login = (props) => {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const submitFormHandler = (event) => {
     event.preventDefault();
     console.log(email, password);
+    navigate("/");
   };
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
-  }
+  };
 
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
-  }
+  };
 
   return (
     <div className={styles["form-container"]}>
       <h2>Login</h2>
-      <form  className={styles["login-form"]}>
+      <form className={styles["login-form"]}>
         <Input
           label={"Your email"}
           id={"email"}
@@ -39,13 +42,20 @@ export const Login = (props) => {
           onChange={handlePasswordChange}
         />
 
-        <Button type="submit" action={{onClick : submitFormHandler}} name="Login">Log In</Button>
+        <Button
+          type="submit"
+          action={{ onClick: submitFormHandler }}
+          name="Login"
+        >
+          Log In
+        </Button>
       </form>
-      <button
+      <p
         className={styles["link-btn"]}
-        onClick={() => props.onFormSubmission("register")}>
+        onClick={() => props.onFormSubmission("register")}
+      >
         Don't have an account? Register here!
-      </button>
+      </p>
     </div>
   );
 };
