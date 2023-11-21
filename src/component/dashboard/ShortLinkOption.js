@@ -5,7 +5,7 @@ import { BsQrCodeScan } from "react-icons/bs";
 
 export default function ShortLinkOption(props) {
 
-    const [activeOption, setActiveOption] = useState("LINK")
+    const [activeOption, setActiveOption] = useState(props.default)
 
     function handleSetActive(data) {
         setActiveOption(data);

@@ -1,4 +1,5 @@
 import { useState, useCallback } from "react";
+import { getTokenFromLocalStorage } from '../helper/LocalStorage'
 // always use object for defining error must containing message and status property 
 
 export function useServer() {
@@ -6,23 +7,32 @@ export function useServer() {
     const [data, setData] = useState(null);
     const [error, setError] = useState(null);
 
-    const handleAPICall = useCallback(async (API, method = "GET", body = undefined) => {
+    const handleAPICall = async (API, method = "GET", body = {}) => {
+        
         setIsLoading(true);
         try {
-            const response = await fetch(API, { method, body: JSON.stringify(body) });
+            const response = await fetch(API, {
+                method,
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": "Bearer " + getTokenFromLocalStorage()
+                },
+                body: method === 'GET' ? undefined : JSON.stringify(body),
+            });
             const result = await response.json();
-            if (!response.ok)
-                setError({ message: result.message, status: response.status });
-            else {
+
+            if (response.ok) {
                 setData(result.message);
+                return result.message;
             }
+            setError({ message: result.message, status: response.status });
 
         } catch (error) {
             setError({ message: error.message, status: null });
         } finally {
             setIsLoading(false);
         }
-    }, []);
+    };
 
     const reset = useCallback(() => {
         setIsLoading(false);
