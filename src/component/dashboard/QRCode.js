@@ -7,7 +7,6 @@ import classes from './QRCode.module.css'
 import { isValidUrl } from '../../helper/Validate'
 import { useServer } from '../../hooks/useServer'
 import { CREATE_LINK_API } from '../../config'
-import { useLocation, useParams } from 'react-router-dom'
 
 export default function QRCode() {
 
@@ -30,9 +29,7 @@ export default function QRCode() {
             const body = { originalUrl: longLink }
             reset();
             const data = await handleAPICall(CREATE_LINK_API, "POST", body)
-            console.log(data);
-            if (!data)
-                return;
+            if (!data) return;            
             setContent(data.urlId)
             setBlur('');
         }

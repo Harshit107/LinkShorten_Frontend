@@ -4,6 +4,7 @@ import Dashboard from "./pages/dashboard";
 import Auth from "./pages/auth";
 import Api from "./pages/api";
 import Analytics from "./pages/analytics";
+import Homepage from "./pages/homepage";
 
 const router = createBrowserRouter([
   {
@@ -15,6 +16,7 @@ const router = createBrowserRouter([
       { path: "analytics", element: <Analytics /> },
     ],
   },
+  { path: "", index: true, element: <Homepage /> },
   { path: "/auth", element: <Auth /> },
 ]);
 function App() {

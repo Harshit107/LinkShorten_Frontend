@@ -3,9 +3,7 @@ import { NavLink } from "react-router-dom";
 import classes from "./Header.module.css";
 import Circle from "../../utils/common/Circle";
 import LOGO_IMAGE from "../../image/logo.jpg";
-import { isLoggedIn, makeLogin } from "../../helper/Common";
-import Button from "../../utils/common/Button";
-import { clearLoacalstorage } from "../../helper/LocalStorage";
+import { isLoggedIn } from "../../helper/Common";
 
 export default function Header() {
   const [login, setLoggedIn] = useState(false);

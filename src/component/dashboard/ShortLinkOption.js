@@ -19,7 +19,7 @@ export default function ShortLinkOption(props) {
                     <CiLink />
                     <span className={classes.title}> Short link</span>
                 </div>
-                <div className={`${classes.options} ${activeOption === "QR" ? classes.active : ''}`}onClick={handleSetActive.bind(null,"QR")}>
+                <div className={`${classes.options} ${activeOption === "QR" ? classes.active : ''}`} onClick={handleSetActive.bind(null,"QR")}>
                     <BsQrCodeScan />
                     <span className={classes.title}>QR Code</span>
                 </div>
