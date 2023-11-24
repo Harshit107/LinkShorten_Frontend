@@ -14,3 +14,4 @@ const url = DEV_URL;
 
 export const CREATE_LINK_API = url+"user"
 export const GET_ALL_LINK_API = url+"user"
+export const CHECK_LOGIN = url+"accounts/dashboard"

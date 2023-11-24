@@ -48,7 +48,7 @@ export default function Header() {
             className={({ isActive }) => (isActive ? classes.active : "")}
             onClick={() => setLoggedIn(!login)}
           >
-            {login ? "Login" : "Logout"}
+            {login ? "Logout" : "Login"}
           </NavLink>
         </div>
       </nav>

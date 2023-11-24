@@ -2,10 +2,10 @@ import React, { useState } from 'react'
 import classes from './ShortLinkCustomURL.module.css'
 import Input from '../../utils/common/Input'
 
-export default function ShortLinkCustomURL() {
+export default function ShortLinkCustomURL(props) {
     const availableDomains = ["Trimurl.online", "Harshit107.in"]
 
-    const [domain, setDomain] = useState(availableDomains[0])
+    const [domain, setDomain] = useState("")
     const [shortLink, setShortLink] = useState("")
 
     const [domainError, setDomainError] = useState(false)
@@ -13,7 +13,9 @@ export default function ShortLinkCustomURL() {
 
     const domainClassName = `${classes.domains} ${domainError ? classes.error : ''}`
     const shortLinkClassName = `${classes.shortLink} ${shortLinkError ? classes.error : ''}`
-    const containerClassOfShortLink = classes.inputContainerClass
+    const containerClassOfShortLink = classes.inputContainerClass;
+
+    
 
     const handleDomainChange = (e) => {
         const searching = e.target.value;
@@ -29,12 +31,13 @@ export default function ShortLinkCustomURL() {
 
     const handleCustomshortLink = (e) => {
         const shortLinkTyping = e.target.value;
+        props.handleAddEndURL(shortLinkTyping)
         setShortLink(shortLinkTyping)
         setShortLinkError(false)
     }
 
     const handleRemovedFocus = () => {
-        if (shortLink.length <= 2)
+        if (shortLink.length > 0 && shortLink.length <= 2)
             setShortLinkError(true)
     }
 
@@ -46,6 +49,7 @@ export default function ShortLinkCustomURL() {
                 value={domain}
                 className={domainClassName}
                 onChange={handleDomainChange}
+                placeholder = "Select a domain"
                 data={containerClassOfShortLink}
             />
             <datalist id='domain-list'>
@@ -61,7 +65,6 @@ export default function ShortLinkCustomURL() {
                 onBlur={handleRemovedFocus}
                 placeholder="Example : Favorite-link"
             />
-
         </div>
     )
 }

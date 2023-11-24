@@ -16,8 +16,11 @@
 
 * {
     box-sizing: border-box;
+    
 }
-
+p {
+    margin : 0px;
+}
 
 a {
     text-decoration: none;
@@ -37,4 +40,10 @@ a:hover {
 }
 .bold {
     font-weight: bold;
+}
+.error {
+    color: red;
+}
+.border-error {
+    border: 1px solid red !important;
 }

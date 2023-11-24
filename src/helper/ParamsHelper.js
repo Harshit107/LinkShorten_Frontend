@@ -1,9 +1,9 @@
 export const AVAILABLE_MODE = ['LINK','QR'];
 
-export const getCurrentUrl = () =>  new URL(window.location.href);
+// export const getCurrentUrl = () =>  new URL(window.location.href);
 
-export const getMode = () => {
+// export const getMode = (mode) => {
     
-    const mode = getCurrentUrl().searchParams.get('mode');
-    return mode?.toUpperCase();
-}
+//     const mode = mode.searchParams.get('mode');
+//     return mode?.toUpperCase();
+// }

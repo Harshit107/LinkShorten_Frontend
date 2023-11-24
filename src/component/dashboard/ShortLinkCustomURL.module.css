@@ -13,6 +13,9 @@
     margin-top: 20px;
     font-weight: 600;
 }
+.shortLink{
+    width: auto;
+}
 
 .domains {
     background-color: rgb(255, 255, 255);

@@ -23,7 +23,7 @@
   -webkit-user-select: none;
   vertical-align: top;
   white-space: nowrap;
-  width: 100%;
+  max-width: 100%;
   z-index: 9;
   border: 0;
   transition: box-shadow .2s;
