@@ -8,6 +8,7 @@ import useInput from '../../hooks/useInput'
 import { isValidUrl } from '../../helper/Validate'
 import { useServer } from '../../hooks/useServer'
 import { CREATE_LINK_API } from '../../config'
+import ShortLinkOutput from './ShortLinkOutput'
 
 export default function ShortLink() {
   const {
@@ -17,24 +18,18 @@ export default function ShortLink() {
     error: longLinkError
   } = useInput((data) => isValidUrl(data));
 
-  const {error, handleAPICall}  = useServer();
+  const { handleAPICall, data, reset } = useServer();
 
   const [endUrl, setendUrl] = useState('');
 
-  const handleAddEndURL = useCallback((url) => setendUrl(url),[]);
-
+  //function Zone
+  const handleAddEndURL = useCallback((url) => setendUrl(url), []);
   const handleCreateLink = async () => {
-    if(longLinkError)  return;
-    
-    const body = {
-      originalUrl : longLink,
-      shortLink : endUrl
-    }
-    const data = await handleAPICall(CREATE_LINK_API, "POST", body);
-    if(data) {
-      console.log(data);
-    }
-
+  
+    if (longLinkError) return;
+    reset();
+    const body = { originalUrl: longLink, shortLink: endUrl }
+    await handleAPICall(CREATE_LINK_API, "POST", body);
   }
 
 
@@ -48,19 +43,21 @@ export default function ShortLink() {
         placeholder={"Example : https://super-long-link.com/shorten-it"}
         value={longLink}
         onChange={textChangeHandler}
-        className={classes.input+" "+ (longLinkActionError ? 'border-error' : '')}
+        className={classes.input + " " + (longLinkActionError ? 'border-error' : '')}
         onBlur={blurHandler}
       />
       {longLinkActionError && <p className='error'>URL is not valid, Please enter valid URL</p>}
 
-      <ShortLinkCustomURL handleAddEndURL={handleAddEndURL}/>
+      <ShortLinkCustomURL handleAddEndURL={handleAddEndURL} />
+
       <div className={classes.enlight}>
         <img src={PARTY} className={classes.party} alt='' />
         <p >End your link with words that will make it unique</p>
       </div >
+      {console.log(data)}
+      <ShortLinkOutput data={data} className={classes.resultContainer}/>
 
-      <Button className={classes.create} name="Create Link" action = {{disabled : longLinkError, onClick : handleCreateLink}}></Button>
-
+      <Button className={classes.create} name="Create Link" action={{ disabled: longLinkError, onClick: handleCreateLink }}></Button>
       <p className={classes.free}>No credit card required. Everything is <span>FREE</span></p>
 
     </div>

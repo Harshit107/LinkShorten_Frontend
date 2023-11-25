@@ -17,7 +17,7 @@ export default function SplashScreen() {
                 <div className={classes.left}>
                     <img src={GROWTH_BG} alt='bg' className={classes.growthImg} />
                     <h1>Create <span className='special'>branded</span><br />and safe short URLs</h1>
-                    <p>Empower Your Brand with us.<br />TrimURL is your expressway to a custom-branded online presence.
+                    <p>Empower Your Brand with us.<br />{defaultSetting.name} is your expressway to a custom-branded online presence.
                         Enhance your brand visibility, track performance,
                         and share confidently, the apex of fast and secure URL management</p>
                     <Button name="Get started" className={classes.getstartBtn} action={{ onClick: handlestarted }} />

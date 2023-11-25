@@ -7,10 +7,11 @@ import classes from './QRCode.module.css'
 import { isValidUrl } from '../../helper/Validate'
 import { useServer } from '../../hooks/useServer'
 import { CREATE_LINK_API } from '../../config'
+import ShortLinkOutput from './ShortLinkOutput'
 
 export default function QRCode() {
 
-    const { error, handleAPICall, reset } = useServer();
+    const { error, handleAPICall, reset, data } = useServer();
     const [longLink, setLongLink] = useState("")
     const [blur, setBlur] = useState("blur");
     const [content, setContent] = useState("https://trimurl.online");
@@ -57,7 +58,7 @@ export default function QRCode() {
                 </div>
                 <CreateQRCode className={blur} content={content} />
             </div>
-
+            <ShortLinkOutput data={data} className={classes.resultContainer}/>
             <Button className={linkClasses.create} name="Create Qr Code" action={{ onClick: handleCreateQR }}></Button>
 
             <p className={linkClasses.free}>No credit card required. Everything is <span>FREE</span></p>
