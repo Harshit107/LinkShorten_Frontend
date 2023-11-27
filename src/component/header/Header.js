@@ -4,18 +4,16 @@ import classes from "./Header.module.css";
 import Circle from "../../utils/common/Circle";
 import LOGO_IMAGE from "../../image/logo.jpg";
 import { isLoggedIn } from "../../helper/Common";
+import { useNavigate } from "react-router-dom";
+import { clearLoacalstorage } from "../../helper/LocalStorage";
 
 export default function Header() {
-  const [login, setLoggedIn] = useState(false);
+  const navigate = useNavigate();
 
-  useEffect(() => {
-    async function checkLogin() {
-      const isUserLoggedin = await isLoggedIn();
-      setLoggedIn(isUserLoggedin);
-    }
-    checkLogin();
-  }, []);
-
+  const logoutHandler = () => {
+    clearLoacalstorage();
+    navigate("/auth");
+  };
   return (
     <header>
       <nav className={classes.mainNav}>
@@ -46,9 +44,9 @@ export default function Header() {
           <NavLink
             to={"/auth"}
             className={({ isActive }) => (isActive ? classes.active : "")}
-            onClick={() => setLoggedIn(!login)}
+            onClick={() => logoutHandler()}
           >
-            {login ? "Logout" : "Login"}
+            {"Logout"}
           </NavLink>
         </div>
       </nav>

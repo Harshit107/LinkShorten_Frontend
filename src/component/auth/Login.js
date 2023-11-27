@@ -3,16 +3,30 @@ import styles from "./Auth.module.css";
 import Input from "../../utils/common/Input";
 import Button from "../../utils/common/Button";
 import { useNavigate } from "react-router-dom";
+import { useServer } from "../../hooks/useServer";
+import { USER_AUTH } from "../../config";
+import { setTokenToLocalStorage } from "../../helper/LocalStorage";
 
 export const Login = (props) => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const { handleAPICall } = useServer();
+
+  const handleUserLoginAuth = async () => {
+    const body = { email, password };
+    const data = await handleAPICall(USER_AUTH, "POST", body);
+    if (data) {
+      setTokenToLocalStorage(data.token);
+      navigate("/dashboard");
+    }
+  };
+
   const submitFormHandler = (event) => {
     event.preventDefault();
     console.log(email, password);
-    navigate("/");
+    handleUserLoginAuth();
   };
 
   const handleEmailChange = (e) => {

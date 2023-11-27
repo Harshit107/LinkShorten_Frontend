@@ -3,6 +3,9 @@ import styles from "./Auth.module.css";
 import Input from "../../utils/common/Input";
 import Button from "../../utils/common/Button";
 import { useNavigate } from "react-router-dom";
+import { USER_REGISTER } from "../../config";
+import { useServer } from "../../hooks/useServer";
+import { setTokenToLocalStorage } from "../../helper/LocalStorage";
 
 export const Register = (props) => {
   const navigate = useNavigate();
@@ -10,10 +13,35 @@ export const Register = (props) => {
   const [password, setPassword] = useState();
   const [name, setName] = useState();
 
-  const submitFormHandler = (event) => {
+  const handleNameChange = (e) => {
+    setName(e.target.value);
+  };
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+  };
+
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
+  };
+
+  const { handleAPICall } = useServer();
+
+  const handleUserRegister = async () => {
+    const body = { name, email, password };
+    const data = await handleAPICall(USER_REGISTER, "POST", body);
+    if (data) {
+      setTokenToLocalStorage(data.token);
+      navigate("/dashboard");
+    }
+  };
+
+  const submitFormHandler = async (event) => {
     event.preventDefault();
+    console.log(event);
+    await handleUserRegister();
+
     console.log(name, email, password);
-    navigate("/");
+    // navigate("/");
   };
   return (
     <div className={styles["form-container"]}>
@@ -24,21 +52,22 @@ export const Register = (props) => {
           id={"name"}
           placeholder={"e.g. Some Name"}
           value={name}
-          onValueChanged={(val) => setName(val)}
+          onChange={handleNameChange}
         />
         <Input
           label={"Your email"}
           id={"email"}
           placeholder={"someone@example.com"}
           value={email}
-          onValueChanged={(val) => setEmail(val)}
+          onChange={handleEmailChange}
         />
         <Input
           label={"Your password"}
           id={"password"}
+          type={"password"}
           placeholder={"**********"}
           value={password}
-          onValueChanged={(val) => setPassword(val)}
+          onChange={handlePasswordChange}
         />
 
         <Button
