@@ -1,7 +1,7 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Root from "./pages/Root";
 import Dashboard from "./pages/dashboard";
-import Auth from "./pages/auth";
+import Auth from "./pages/Auth";
 import Api from "./pages/api";
 import Analytics from "./pages/analytics";
 import Homepage from "./pages/homepage";
