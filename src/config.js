@@ -6,7 +6,7 @@ export const defaultSetting = {
   replyEmail: ["support@trimurl.online"],
 };
 
-const DEV_URL = "http://localhost:3333/";
+const DEV_URL = "https://trimurl.online/";
 // const PROD_URL = 'https://trimurl.online/'
 
 const url = DEV_URL;
