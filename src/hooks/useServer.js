@@ -10,6 +10,7 @@ export function useServer() {
     const handleAPICall = async (API, method = "GET", body = {}) => {
         
         setIsLoading(true);
+        console.log("Calling API");
         try {
             const response = await fetch(API, {
                 method,
@@ -23,7 +24,8 @@ export function useServer() {
 
             if (response.ok) {
                 setData(result.message);
-                return result.message;
+                 console.log("Returning result...");
+                return result.message ?? result;
             }
             setError({ message: result.message, status: response.status });
 

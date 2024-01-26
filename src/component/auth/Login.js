@@ -18,6 +18,7 @@ export const Login = (props) => {
     const body = { email, password };
     const data = await handleAPICall(USER_AUTH, "POST", body);
     if (data) {
+      
       setTokenToLocalStorage(data.token);
       navigate("/dashboard");
     }
