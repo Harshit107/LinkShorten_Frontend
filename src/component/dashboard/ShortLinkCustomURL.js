@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
 import classes from './ShortLinkCustomURL.module.css'
 import Input from '../../utils/common/Input'
+import DOMAINS from '../../config/domain'
 
 export default function ShortLinkCustomURL(props) {
-    const availableDomains = ["Trimurl.online", "Harshit107.in"]
+    const availableDomains = ["Trimurl.online", DOMAINS.ROOT]
 
     const [domain, setDomain] = useState("")
     const [shortLink, setShortLink] = useState("")
