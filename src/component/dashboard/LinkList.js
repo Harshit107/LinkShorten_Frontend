@@ -1,8 +1,9 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState, useCallback, useMemo } from "react";
 import classes from "./LinkList.module.css";
 import { defaultSetting, GET_ALL_LINK_API } from "../../config";
 import { useServer } from "../../hooks/useServer";
 import { formatMongoTimestamp } from "../../helper/Common";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   RiFileCopyLine,
   RiCheckLine,
@@ -10,11 +11,14 @@ import {
   RiDeleteBin6Line,
   RiLinkM,
   RiRefreshLine,
+  RiSearchLine,
+  RiFireLine,
 } from "react-icons/ri";
 
 export default function LinkList({ refreshTrigger }) {
-  const { handleAPICall, isLoading, error } = useServer();
+  const { handleAPICall, isLoading } = useServer();
   const [links, setLinks] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
   const [copiedId, setCopiedId] = useState(null);
   const [deletingId, setDeletingId] = useState(null);
 
@@ -58,16 +62,31 @@ export default function LinkList({ refreshTrigger }) {
     setDeletingId(null);
   };
 
-  const totalClicks = links.reduce((sum, item) => sum + (item.click || 0), 0);
+  const totalClicks = useMemo(() => {
+    return links.reduce((sum, item) => sum + (item.click || 0), 0);
+  }, [links]);
+
+  const filteredLinks = useMemo(() => {
+    if (!searchTerm.trim()) return links;
+    const term = searchTerm.toLowerCase();
+    return links.filter(
+      (link) =>
+        link.urlId?.toLowerCase().includes(term) ||
+        link.originalUrl?.toLowerCase().includes(term)
+    );
+  }, [links, searchTerm]);
 
   return (
     <div className={classes.container}>
       <div className={classes.header}>
-        <h2>
-          <RiLinkM size={22} color="#2563eb" />
-          My Shortened Links
-        </h2>
-        <div className={classes.stats}>
+        <div className={classes.titleArea}>
+          <h2>
+            <RiLinkM size={24} color="#2563eb" />
+            <span>Shortened Links</span>
+          </h2>
+        </div>
+
+        <div className={classes.statsArea}>
           <span className={classes.statBadge}>
             Total Links: <strong>{links.length}</strong>
           </span>
@@ -76,25 +95,50 @@ export default function LinkList({ refreshTrigger }) {
           </span>
           <button
             onClick={fetchLinks}
-            className={classes.actionBtn}
-            title="Refresh link list"
+            className={classes.refreshBtn}
+            title="Refresh links"
           >
-            <RiRefreshLine size={16} />
+            <RiRefreshLine size={15} />
+            <span>Refresh</span>
           </button>
         </div>
       </div>
 
+      {links.length > 0 && (
+        <div className={classes.filterBar}>
+          <div style={{ position: "relative", flex: 1, display: "flex", alignItems: "center" }}>
+            <RiSearchLine
+              size={16}
+              style={{ position: "absolute", left: "12px", color: "#94a3b8" }}
+            />
+            <input
+              type="text"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              placeholder="Search links by alias or destination URL..."
+              className={classes.searchInput}
+              style={{ paddingLeft: "36px" }}
+            />
+          </div>
+        </div>
+      )}
+
       {isLoading && links.length === 0 ? (
-        <div style={{ textAlign: "center", padding: "30px", color: "#6b7280" }}>
+        <div style={{ textAlign: "center", padding: "40px", color: "#64748b" }}>
           Loading your links...
         </div>
       ) : links.length === 0 ? (
         <div className={classes.emptyState}>
-          <RiLinkM size={40} color="#9ca3af" />
-          <p>You haven't created any links yet.</p>
-          <span style={{ fontSize: "0.85rem", color: "#9ca3af" }}>
-            Paste a URL above to create your first trackable short link!
-          </span>
+          <div className={classes.emptyIconWrapper}>
+            <RiLinkM size={28} />
+          </div>
+          <h4>No short links created yet</h4>
+          <p>Paste a long URL above to generate your first trackable short link.</p>
+        </div>
+      ) : filteredLinks.length === 0 ? (
+        <div className={classes.emptyState}>
+          <h4>No matching links found</h4>
+          <p>No links matched "{searchTerm}". Try a different search term.</p>
         </div>
       ) : (
         <div className={classes.tableWrapper}>
@@ -105,79 +149,98 @@ export default function LinkList({ refreshTrigger }) {
                 <th>Destination URL</th>
                 <th>Clicks</th>
                 <th>Created</th>
-                <th>Actions</th>
+                <th style={{ textAlign: "right" }}>Actions</th>
               </tr>
             </thead>
             <tbody>
-              {links.map((link) => {
-                const shortUrl = `${defaultSetting.domain}${link.urlId}`;
-                const isCopied = copiedId === link._id;
-                const isDeleting = deletingId === link._id;
+              <AnimatePresence>
+                {filteredLinks.map((link) => {
+                  const shortUrl = `${defaultSetting.domain}${link.urlId}`;
+                  const isCopied = copiedId === link._id;
+                  const isDeleting = deletingId === link._id;
+                  const hasVisits = (link.click || 0) > 0;
 
-                return (
-                  <tr key={link._id}>
-                    <td>
-                      <div className={classes.shortUrlCell}>
-                        <a
-                          href={shortUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
+                  return (
+                    <motion.tr
+                      key={link._id}
+                      initial={{ opacity: 0, y: 8 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, scale: 0.95 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <td>
+                        <div className={classes.shortUrlCell}>
+                          <a
+                            href={shortUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            /{link.urlId}
+                          </a>
+                        </div>
+                      </td>
+                      <td>
+                        <div className={classes.longUrlCell} title={link.originalUrl}>
+                          {link.originalUrl}
+                        </div>
+                      </td>
+                      <td>
+                        <span
+                          className={
+                            hasVisits
+                              ? classes.clickBadgeActive
+                              : classes.clickBadgeZero
+                          }
                         >
-                          /{link.urlId}
-                        </a>
-                      </div>
-                    </td>
-                    <td>
-                      <div className={classes.longUrlCell} title={link.originalUrl}>
-                        {link.originalUrl}
-                      </div>
-                    </td>
-                    <td>
-                      <span className={classes.clickBadge}>
-                        {link.click || 0} visits
-                      </span>
-                    </td>
-                    <td style={{ color: "#6b7280", fontSize: "0.85rem" }}>
-                      {formatMongoTimestamp(link.createdAt)}
-                    </td>
-                    <td>
-                      <button
-                        onClick={() => handleCopy(link._id, shortUrl)}
-                        className={classes.actionBtn}
-                        title="Copy short link"
-                      >
-                        {isCopied ? (
-                          <RiCheckLine size={15} color="#059669" />
-                        ) : (
-                          <RiFileCopyLine size={15} />
-                        )}
-                        {isCopied ? "Copied" : "Copy"}
-                      </button>
+                          {hasVisits && <RiFireLine size={13} />}
+                          {link.click || 0} visits
+                        </span>
+                      </td>
+                      <td style={{ color: "#64748b", fontSize: "0.85rem" }}>
+                        {formatMongoTimestamp(link.createdAt)}
+                      </td>
+                      <td>
+                        <div className={classes.actionBtns} style={{ justifyContent: "flex-end" }}>
+                          <button
+                            onClick={() => handleCopy(link._id, shortUrl)}
+                            className={`${classes.actionBtn} ${
+                              isCopied ? classes.actionBtnCopied : ""
+                            }`}
+                            title="Copy link"
+                          >
+                            {isCopied ? (
+                              <RiCheckLine size={14} color="#059669" />
+                            ) : (
+                              <RiFileCopyLine size={14} />
+                            )}
+                            <span>{isCopied ? "Copied" : "Copy"}</span>
+                          </button>
 
-                      <a
-                        href={shortUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className={classes.actionBtn}
-                        title="Visit short link"
-                        style={{ textDecoration: "none" }}
-                      >
-                        <RiExternalLinkLine size={15} />
-                      </a>
+                          <a
+                            href={shortUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className={classes.actionBtn}
+                            title="Open short link"
+                          >
+                            <RiExternalLinkLine size={14} />
+                          </a>
 
-                      <button
-                        onClick={() => handleDelete(link._id)}
-                        disabled={isDeleting}
-                        className={`${classes.actionBtn} ${classes.deleteBtn}`}
-                        title="Delete link"
-                      >
-                        <RiDeleteBin6Line size={15} />
-                        {isDeleting ? "..." : "Delete"}
-                      </button>
-                    </td>
-                  </tr>
-                );
-              })}
+                          <button
+                            onClick={() => handleDelete(link._id)}
+                            disabled={isDeleting}
+                            className={`${classes.actionBtn} ${classes.deleteBtn}`}
+                            title="Delete link"
+                          >
+                            <RiDeleteBin6Line size={14} />
+                            <span>{isDeleting ? "..." : "Delete"}</span>
+                          </button>
+                        </div>
+                      </td>
+                    </motion.tr>
+                  );
+                })}
+              </AnimatePresence>
             </tbody>
           </table>
         </div>

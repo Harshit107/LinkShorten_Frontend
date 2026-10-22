@@ -1,42 +1,45 @@
 .container {
     width: 90%;
     max-width: 900px;
-    margin: 0 auto;
+    margin: 16px auto 0;
     background-color: #ffffff;
-    padding: 32px;
-    border-radius: 12px;
+    padding: 36px;
+    border-radius: 16px;
     border: 1px solid #e2e8f0;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+    box-shadow: 0 4px 25px rgba(0, 0, 0, 0.05);
+    box-sizing: border-box;
 }
 
 .container h1 {
-    font-size: 1.5rem;
+    font-size: 1.45rem;
     color: #0f172a;
     margin: 0 0 20px 0;
     font-weight: 700;
+    letter-spacing: -0.02em;
 }
 
 .resultContainer {
     width: 100%;
-    border: 1px solid #e2e8f0;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-    border-radius: 10px;
-    margin-top: 20px !important;
-    background-color: #f8fafc;
-    padding: 16px;
+    border: 1px solid #bfdbfe;
+    box-shadow: 0 4px 15px rgba(37, 99, 235, 0.08);
+    border-radius: 12px;
+    margin-top: 24px !important;
+    background: linear-gradient(135deg, #ffffff 0%, #eff6ff 100%);
+    padding: 20px;
+    box-sizing: border-box;
 }
 
 .enlight {
-    background-color: #eff6ff;
-    border: 1px solid #dbeafe;
-    color: #1e40af;
-    border-radius: 8px;
+    background-color: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    color: #166534;
+    border-radius: 10px;
     text-align: left;
     display: flex;
     align-items: center;
     gap: 12px;
-    margin-top: 16px;
-    padding: 10px 14px;
+    margin-top: 18px;
+    padding: 12px 16px;
 }
 
 .enlight p {
@@ -46,8 +49,8 @@
 }
 
 .party {
-    width: 24px;
-    height: 24px;
+    width: 22px;
+    height: 22px;
 }
 
 .input {
@@ -60,13 +63,15 @@
 
 .create {
     width: 100%;
-    max-width: 240px;
-    height: 44px;
+    max-width: 220px;
+    height: 46px;
     margin-top: 24px;
+    border-radius: 10px;
+    font-weight: 600;
 }
 
 .free {
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     color: #64748b;
     text-align: center;
     margin-top: 20px;

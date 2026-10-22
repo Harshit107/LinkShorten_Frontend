@@ -1,13 +1,22 @@
-import classes from './DashboardHeading.module.css';
+import React from "react";
+import classes from "./DashboardHeading.module.css";
+import { RiFlashlightLine } from "react-icons/ri";
 
 export default function DashboardHeading() {
-    return (
-        <div className={classes.heading}>
-            <div className={classes.content}>
-                <h1>Make every <span className='special'>connection</span> count</h1>
-                <p className='size-20'> Create short links and customized QR Codes. Share them anywhere.
-                    Track what's working, and what's not. All inside the <span className='special bold'>TrimURL Connections Platform</span> </p>
-            </div>
+  return (
+    <div className={classes.heading}>
+      <div className={classes.content}>
+        <div className={classes.badge}>
+          <RiFlashlightLine size={14} />
+          <span>Intelligent URL Management & Dynamic QR Engine</span>
         </div>
-    )
+        <h1>
+          Make every <span className={classes.special}>connection</span> count
+        </h1>
+        <p>
+          Generate branded short links and high-res QR codes. Track visitor engagement in real time with high-precision metrics.
+        </p>
+      </div>
+    </div>
+  );
 }
