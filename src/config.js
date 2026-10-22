@@ -1,15 +1,22 @@
 import DOMAINS from "./config/domain";
 
 const getApiBaseUrl = () => {
-  if (process.env.REACT_APP_API_URL) {
-    return process.env.REACT_APP_API_URL.endsWith("/")
-      ? process.env.REACT_APP_API_URL
-      : `${process.env.REACT_APP_API_URL}/`;
+  let apiUrl = process.env.REACT_APP_API_URL;
+  if (apiUrl && apiUrl.trim()) {
+    let cleanUrl = apiUrl.trim();
+    if (!/^https?:\/\//i.test(cleanUrl)) {
+      cleanUrl = `https://${cleanUrl}`;
+    }
+    return cleanUrl.endsWith("/") ? cleanUrl : `${cleanUrl}/`;
   }
   if (typeof window !== "undefined" && window.location.hostname === "localhost") {
     return "http://localhost:3000/";
   }
-  return `${DOMAINS.LINK_SHORTEN.API}/`;
+  let fallback = DOMAINS.LINK_SHORTEN.API || "https://trimurl.online";
+  if (!/^https?:\/\//i.test(fallback)) {
+    fallback = `https://${fallback}`;
+  }
+  return fallback.endsWith("/") ? fallback : `${fallback}/`;
 };
 
 export const API_BASE_URL = getApiBaseUrl();
