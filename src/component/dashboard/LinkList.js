@@ -3,6 +3,7 @@ import classes from "./LinkList.module.css";
 import { defaultSetting, GET_ALL_LINK_API } from "../../config";
 import { useServer } from "../../hooks/useServer";
 import { formatMongoTimestamp } from "../../helper/Common";
+import { isValidUrl } from "../../helper/Validate";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   RiFileCopyLine,
@@ -13,6 +14,9 @@ import {
   RiRefreshLine,
   RiSearchLine,
   RiFireLine,
+  RiEditLine,
+  RiLockLine,
+  RiCloseLine,
 } from "react-icons/ri";
 
 export default function LinkList({ refreshTrigger }) {
@@ -21,6 +25,12 @@ export default function LinkList({ refreshTrigger }) {
   const [searchTerm, setSearchTerm] = useState("");
   const [copiedId, setCopiedId] = useState(null);
   const [deletingId, setDeletingId] = useState(null);
+
+  // Edit Link State
+  const [editingLink, setEditingLink] = useState(null);
+  const [editUrl, setEditUrl] = useState("");
+  const [editError, setEditError] = useState("");
+  const [isSaving, setIsSaving] = useState(false);
 
   const fetchLinks = useCallback(async () => {
     const result = await handleAPICall(GET_ALL_LINK_API, "GET");
@@ -57,9 +67,68 @@ export default function LinkList({ refreshTrigger }) {
     const deleteUrl = `${GET_ALL_LINK_API}/${id}`;
     const res = await handleAPICall(deleteUrl, "DELETE");
     if (res) {
-      setLinks((prev) => prev.filter((l) => l._id !== id));
+      setLinks((prev) => prev.filter((l) => (l.id || l._id) !== id));
     }
     setDeletingId(null);
+  };
+
+  const handleOpenEdit = (link) => {
+    setEditingLink(link);
+    setEditUrl(link.originalUrl || "");
+    setEditError("");
+  };
+
+  const handleCloseEdit = () => {
+    setEditingLink(null);
+    setEditUrl("");
+    setEditError("");
+    setIsSaving(false);
+  };
+
+  const handleSaveEdit = async () => {
+    if (!editingLink) return;
+    const trimmed = (editUrl || "").trim();
+    if (!trimmed) {
+      setEditError("Destination URL cannot be empty");
+      return;
+    }
+
+    let finalUrl = trimmed;
+    if (!/^https?:\/\//i.test(finalUrl)) {
+      finalUrl = `https://${finalUrl}`;
+    }
+
+    if (!isValidUrl(finalUrl)) {
+      setEditError("Please enter a valid URL (e.g. https://example.com/target)");
+      return;
+    }
+
+    const linkId = editingLink.id || editingLink._id;
+    if (finalUrl === editingLink.originalUrl) {
+      handleCloseEdit();
+      return;
+    }
+
+    setIsSaving(true);
+    setEditError("");
+    const updateEndpoint = `${GET_ALL_LINK_API}/${linkId}`;
+    const result = await handleAPICall(updateEndpoint, "PATCH", {
+      originalUrl: finalUrl,
+    });
+    setIsSaving(false);
+
+    if (result) {
+      setLinks((prev) =>
+        prev.map((item) =>
+          (item.id || item._id) === linkId
+            ? { ...item, originalUrl: finalUrl }
+            : item
+        )
+      );
+      handleCloseEdit();
+    } else {
+      setEditError("Failed to update URL. Please check server connection.");
+    }
   };
 
   const totalClicks = useMemo(() => {
@@ -155,14 +224,15 @@ export default function LinkList({ refreshTrigger }) {
             <tbody>
               <AnimatePresence>
                 {filteredLinks.map((link) => {
+                  const linkId = link.id || link._id;
                   const shortUrl = `${defaultSetting.domain}${link.urlId}`;
-                  const isCopied = copiedId === link._id;
-                  const isDeleting = deletingId === link._id;
+                  const isCopied = copiedId === linkId;
+                  const isDeleting = deletingId === linkId;
                   const hasVisits = (link.click || 0) > 0;
 
                   return (
                     <motion.tr
-                      key={link._id}
+                      key={linkId}
                       initial={{ opacity: 0, y: 8 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, scale: 0.95 }}
@@ -202,7 +272,7 @@ export default function LinkList({ refreshTrigger }) {
                       <td>
                         <div className={classes.actionBtns} style={{ justifyContent: "flex-end" }}>
                           <button
-                            onClick={() => handleCopy(link._id, shortUrl)}
+                            onClick={() => handleCopy(linkId, shortUrl)}
                             className={`${classes.actionBtn} ${
                               isCopied ? classes.actionBtnCopied : ""
                             }`}
@@ -216,6 +286,15 @@ export default function LinkList({ refreshTrigger }) {
                             <span>{isCopied ? "Copied" : "Copy"}</span>
                           </button>
 
+                          <button
+                            onClick={() => handleOpenEdit(link)}
+                            className={`${classes.actionBtn} ${classes.editBtn}`}
+                            title="Edit destination URL"
+                          >
+                            <RiEditLine size={14} />
+                            <span>Edit</span>
+                          </button>
+
                           <a
                             href={shortUrl}
                             target="_blank"
@@ -227,7 +306,7 @@ export default function LinkList({ refreshTrigger }) {
                           </a>
 
                           <button
-                            onClick={() => handleDelete(link._id)}
+                            onClick={() => handleDelete(linkId)}
                             disabled={isDeleting}
                             className={`${classes.actionBtn} ${classes.deleteBtn}`}
                             title="Delete link"
@@ -245,6 +324,112 @@ export default function LinkList({ refreshTrigger }) {
           </table>
         </div>
       )}
+
+      {/* Edit Link Destination Modal */}
+      <AnimatePresence>
+        {editingLink && (
+          <motion.div
+            className={classes.modalBackdrop}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={handleCloseEdit}
+          >
+            <motion.div
+              className={classes.modalContent}
+              initial={{ opacity: 0, scale: 0.94, y: 16 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.94, y: 16 }}
+              transition={{ duration: 0.2 }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className={classes.modalHeader}>
+                <div className={classes.modalTitleArea}>
+                  <h3>
+                    <RiEditLine size={20} color="#38bdf8" />
+                    <span>Edit Destination URL</span>
+                  </h3>
+                  <p className={classes.modalSubtitle}>
+                    Update where this short link points. The short alias is permanent.
+                  </p>
+                </div>
+                <button
+                  type="button"
+                  onClick={handleCloseEdit}
+                  className={classes.modalCloseBtn}
+                  title="Close modal"
+                >
+                  <RiCloseLine size={20} />
+                </button>
+              </div>
+
+              <div className={classes.modalBody}>
+                <div className={classes.formGroup}>
+                  <label className={classes.formLabel}>
+                    <RiLockLine size={13} color="#94a3b8" />
+                    <span>Short Link Alias (Permanent & Locked)</span>
+                  </label>
+                  <div className={classes.lockedAliasBox}>
+                    <span className={classes.lockedDomain}>{defaultSetting.domain}</span>
+                    <span className={classes.lockedSlug}>{editingLink.urlId}</span>
+                    <span className={classes.lockedBadge}>
+                      <RiLockLine size={11} /> Locked
+                    </span>
+                  </div>
+                  <span className={classes.fieldNote}>
+                    The short alias cannot be changed to prevent broken bookmarks, QR codes, or external links.
+                  </span>
+                </div>
+
+                <div className={classes.formGroup}>
+                  <label className={classes.formLabel} htmlFor="editOriginalUrl">
+                    <span>Original Destination URL</span>
+                    <span className={classes.requiredStar}>*</span>
+                  </label>
+                  <input
+                    id="editOriginalUrl"
+                    type="text"
+                    value={editUrl}
+                    onChange={(e) => {
+                      setEditUrl(e.target.value);
+                      if (editError) setEditError("");
+                    }}
+                    placeholder="https://example.com/target-page"
+                    className={`${classes.modalInput} ${editError ? classes.inputError : ""}`}
+                    autoFocus
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter") handleSaveEdit();
+                      if (e.key === "Escape") handleCloseEdit();
+                    }}
+                  />
+                  {editError && (
+                    <span className={classes.errorMessage}>{editError}</span>
+                  )}
+                </div>
+              </div>
+
+              <div className={classes.modalFooter}>
+                <button
+                  type="button"
+                  onClick={handleCloseEdit}
+                  className={classes.cancelBtn}
+                  disabled={isSaving}
+                >
+                  Cancel
+                </button>
+                <button
+                  type="button"
+                  onClick={handleSaveEdit}
+                  disabled={isSaving}
+                  className={classes.saveBtn}
+                >
+                  {isSaving ? "Saving..." : "Save Changes"}
+                </button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
