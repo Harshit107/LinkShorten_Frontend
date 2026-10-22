@@ -4,6 +4,7 @@ const getApiBaseUrl = () => {
   let apiUrl = process.env.REACT_APP_API_URL;
   if (apiUrl && apiUrl.trim()) {
     let cleanUrl = apiUrl.trim();
+    cleanUrl = cleanUrl.replace(/^https?:\/\/+/i, "https://");
     if (!/^https?:\/\//i.test(cleanUrl)) {
       cleanUrl = `https://${cleanUrl}`;
     }
@@ -12,7 +13,8 @@ const getApiBaseUrl = () => {
   if (typeof window !== "undefined" && window.location.hostname === "localhost") {
     return "http://localhost:3000/";
   }
-  let fallback = DOMAINS.LINK_SHORTEN.API || "https://trimurl.online";
+  let fallback = DOMAINS.LINK_SHORTEN.API || "https://trimurl-api.harshit107.online";
+  fallback = fallback.replace(/^https?:\/\/+/i, "https://");
   if (!/^https?:\/\//i.test(fallback)) {
     fallback = `https://${fallback}`;
   }
@@ -24,7 +26,7 @@ export const API_BASE_URL = getApiBaseUrl();
 export const defaultSetting = {
   name: "TrimURL",
   domain: API_BASE_URL,
-  supportedDomains: ["TrimUrl.online", DOMAINS.ROOT, "localhost:3000"],
+  supportedDomains: ["trimurl.harshit107.online", "trimurl.online", DOMAINS.ROOT, "localhost:3000"],
   supportEmail: [DOMAINS.EMAIL.CONTACT_EMAIL],
   replyEmail: [DOMAINS.EMAIL.SUPPORT_EMAIL],
 };
