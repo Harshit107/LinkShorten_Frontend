@@ -1,47 +1,50 @@
 :root {
-    /* Brand Navy Palette (Matching Header #0d1e25) */
-    --bg-1: #0d1e25;
-    --bg-dark: #071015;
-    --bg-navy-light: #152932;
+    /* Brand Cosmic Navy & Obsidian Palette */
+    --bg-1: #090e17;
+    --bg-dark: #05080f;
+    --bg-navy-light: #0f172a;
+    --bg-surface: rgba(15, 23, 42, 0.75);
+    --bg-surface-elevated: rgba(30, 41, 59, 0.7);
     --bg-white-1: #ffffff;
-    --bg-white-10: #f8fafc;
+    --bg-white-10: #090e17;
 
-    /* Brand Primary Accent (Modern Indigo / Royal Blue) */
-    --primary: #2563eb;
-    --primary-hover: #1d4ed8;
-    --primary-light: #eff6ff;
-    --primary-gradient: linear-gradient(135deg, #1d4ed8 0%, #2563eb 50%, #3b82f6 100%);
-    --navy-gradient: radial-gradient(circle at 10% 20%, #132b35 0%, #0d1e25 90%);
+    /* Brand Primary Accent (Modern Indigo / Royal Blue / Sky) */
+    --primary: #38bdf8;
+    --primary-blue: #2563eb;
+    --primary-hover: #60a5fa;
+    --primary-light: rgba(56, 189, 248, 0.12);
+    --primary-gradient: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+    --accent-gradient: linear-gradient(135deg, #60a5fa 0%, #38bdf8 50%, #34d399 100%);
 
     /* Brand Secondary Accent (Emerald Success) */
     --accent-emerald: #10b981;
-    --accent-emerald-light: #ecfdf5;
+    --accent-emerald-light: rgba(16, 185, 129, 0.15);
     --accent-emerald-hover: #059669;
 
-    /* Legacy tokens preserved for backward compatibility */
-    --text-0: #1d4ed8;
-    --text-1: #2563eb;
+    /* Legacy tokens preserved */
+    --text-0: #60a5fa;
+    --text-1: #38bdf8;
     --text-2: #38bdf8;
     --text-3: #93c5fd;
 
-    --heading-0: #1d4ed8;
-    --heading-1: #2563eb;
-    --heading-5: #3b82f6;
-    --heading-8: #dbeafe;
-    --heading-10: #e2e8f0;
+    --heading-0: #ffffff;
+    --heading-1: #38bdf8;
+    --heading-5: #60a5fa;
+    --heading-8: #1e293b;
+    --heading-10: #0f172a;
 
     /* Text & Neutral Surface Tokens */
-    --text-main: #0f172a;
-    --text-muted: #64748b;
-    --text-sub: #475569;
-    --border-color: #e2e8f0;
-    --border-focus: #3b82f6;
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    --text-sub: #cbd5e1;
+    --border-color: rgba(255, 255, 255, 0.1);
+    --border-focus: #38bdf8;
 
-    /* Shadows */
-    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -1px rgba(0, 0, 0, 0.04);
-    --shadow-lg: 0 10px 15px -3px rgba(13, 30, 37, 0.08), 0 4px 6px -2px rgba(13, 30, 37, 0.04);
-    --shadow-card: 0 20px 25px -5px rgba(13, 30, 37, 0.12), 0 10px 10px -5px rgba(13, 30, 37, 0.04);
+    /* Shadows & Glows */
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 12px 24px -4px rgba(0, 0, 0, 0.5);
+    --shadow-card: 0 20px 40px -15px rgba(0, 0, 0, 0.65), 0 0 25px rgba(37, 99, 235, 0.12);
 }
 
 * {
@@ -49,7 +52,7 @@
 }
 
 body {
-    background-color: var(--bg-white-10);
+    background-color: var(--bg-1);
     color: var(--text-main);
 }
 
@@ -68,7 +71,10 @@ a:hover {
 }
 
 .special {
-    color: var(--primary);
+    background: var(--accent-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 700;
 }
 
 .size-20 {
@@ -80,7 +86,7 @@ a:hover {
 }
 
 .error {
-    color: #ef4444;
+    color: #f87171;
 }
 
 .border-error {

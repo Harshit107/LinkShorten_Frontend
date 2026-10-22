@@ -44,13 +44,13 @@ export default function Analytics() {
       : null;
 
   return (
-    <div style={{ maxWidth: "1000px", margin: "40px auto", padding: "0 20px" }}>
+    <div style={{ maxWidth: "1060px", margin: "40px auto", padding: "0 24px", position: "relative", zIndex: 10 }}>
       <div
         style={{
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
-          marginBottom: "28px",
+          marginBottom: "32px",
           flexWrap: "wrap",
           gap: "16px",
         }}
@@ -58,17 +58,17 @@ export default function Analytics() {
         <div>
           <h1
             style={{
-              fontSize: "1.9rem",
+              fontSize: "2.2rem",
               fontWeight: 800,
-              color: "#0f172a",
-              letterSpacing: "-0.025em",
+              color: "#ffffff",
+              letterSpacing: "-0.03em",
               margin: 0,
             }}
           >
             Analytics & Performance
           </h1>
-          <p style={{ color: "#64748b", margin: "6px 0 0", fontSize: "0.95rem" }}>
-            Track real-time engagement and visitor clicks across all your shortened URLs
+          <p style={{ color: "#94a3b8", margin: "8px 0 0", fontSize: "1rem" }}>
+            Real-time telemetry, visitor attribution, and conversion metrics
           </p>
         </div>
         <button
@@ -77,15 +77,15 @@ export default function Analytics() {
             display: "inline-flex",
             alignItems: "center",
             gap: "8px",
-            padding: "9px 18px",
-            background: "#ffffff",
-            border: "1px solid #cbd5e1",
+            padding: "10px 20px",
+            background: "rgba(255, 255, 255, 0.08)",
+            border: "1px solid rgba(255, 255, 255, 0.15)",
             borderRadius: "10px",
-            color: "#334155",
+            color: "#ffffff",
             cursor: "pointer",
             fontWeight: 600,
             fontSize: "0.9rem",
-            boxShadow: "0 1px 3px rgba(0,0,0,0.05)",
+            backdropFilter: "blur(12px)",
             transition: "all 0.2s ease",
           }}
         >
@@ -93,33 +93,34 @@ export default function Analytics() {
         </button>
       </div>
 
-      {/* KPI Cards with Framer Motion hover and entrance */}
+      {/* KPI Cards with 3D Parallax Hover */}
       <div
         style={{
           display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
+          gridTemplateColumns: "repeat(auto-fit, minmax(230px, 1fr))",
           gap: "20px",
           marginBottom: "36px",
         }}
       >
         <motion.div
-          whileHover={{ y: -4 }}
+          whileHover={{ y: -6, scale: 1.02 }}
           transition={{ duration: 0.2 }}
           style={{
-            background: "#ffffff",
+            background: "linear-gradient(145deg, rgba(30, 41, 59, 0.7) 0%, rgba(15, 23, 42, 0.9) 100%)",
             padding: "24px",
-            borderRadius: "16px",
-            border: "1px solid #e2e8f0",
-            boxShadow: "0 4px 20px rgba(0,0,0,0.04)",
+            borderRadius: "18px",
+            border: "1px solid rgba(255, 255, 255, 0.12)",
+            boxShadow: "0 20px 40px -15px rgba(0, 0, 0, 0.6), 0 0 25px rgba(37, 99, 235, 0.12)",
+            backdropFilter: "blur(16px)",
           }}
         >
-          <div style={{ display: "flex", alignItems: "center", gap: "10px", color: "#2563eb" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: "12px", color: "#38bdf8" }}>
             <div
               style={{
-                width: "40px",
-                height: "40px",
+                width: "42px",
+                height: "42px",
                 borderRadius: "10px",
-                background: "#eff6ff",
+                background: "rgba(56, 189, 248, 0.15)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
@@ -127,33 +128,34 @@ export default function Analytics() {
             >
               <RiLinkM size={22} />
             </div>
-            <span style={{ color: "#64748b", fontSize: "0.9rem", fontWeight: 600 }}>
+            <span style={{ color: "#94a3b8", fontSize: "0.9rem", fontWeight: 600 }}>
               Total Short Links
             </span>
           </div>
-          <div style={{ fontSize: "2.2rem", fontWeight: 800, color: "#0f172a", marginTop: "16px" }}>
+          <div style={{ fontSize: "2.4rem", fontWeight: 800, color: "#ffffff", marginTop: "16px" }}>
             {totalLinks}
           </div>
         </motion.div>
 
         <motion.div
-          whileHover={{ y: -4 }}
+          whileHover={{ y: -6, scale: 1.02 }}
           transition={{ duration: 0.2 }}
           style={{
-            background: "#ffffff",
+            background: "linear-gradient(145deg, rgba(30, 41, 59, 0.7) 0%, rgba(15, 23, 42, 0.9) 100%)",
             padding: "24px",
-            borderRadius: "16px",
-            border: "1px solid #e2e8f0",
-            boxShadow: "0 4px 20px rgba(0,0,0,0.04)",
+            borderRadius: "18px",
+            border: "1px solid rgba(255, 255, 255, 0.12)",
+            boxShadow: "0 20px 40px -15px rgba(0, 0, 0, 0.6), 0 0 25px rgba(16, 185, 129, 0.12)",
+            backdropFilter: "blur(16px)",
           }}
         >
-          <div style={{ display: "flex", alignItems: "center", gap: "10px", color: "#10b981" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: "12px", color: "#34d399" }}>
             <div
               style={{
-                width: "40px",
-                height: "40px",
+                width: "42px",
+                height: "42px",
                 borderRadius: "10px",
-                background: "#ecfdf5",
+                background: "rgba(16, 185, 129, 0.15)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
@@ -161,33 +163,34 @@ export default function Analytics() {
             >
               <RiCursorLine size={22} />
             </div>
-            <span style={{ color: "#64748b", fontSize: "0.9rem", fontWeight: 600 }}>
+            <span style={{ color: "#94a3b8", fontSize: "0.9rem", fontWeight: 600 }}>
               Total Visits
             </span>
           </div>
-          <div style={{ fontSize: "2.2rem", fontWeight: 800, color: "#0f172a", marginTop: "16px" }}>
+          <div style={{ fontSize: "2.4rem", fontWeight: 800, color: "#ffffff", marginTop: "16px" }}>
             {totalClicks}
           </div>
         </motion.div>
 
         <motion.div
-          whileHover={{ y: -4 }}
+          whileHover={{ y: -6, scale: 1.02 }}
           transition={{ duration: 0.2 }}
           style={{
-            background: "#ffffff",
+            background: "linear-gradient(145deg, rgba(30, 41, 59, 0.7) 0%, rgba(15, 23, 42, 0.9) 100%)",
             padding: "24px",
-            borderRadius: "16px",
-            border: "1px solid #e2e8f0",
-            boxShadow: "0 4px 20px rgba(0,0,0,0.04)",
+            borderRadius: "18px",
+            border: "1px solid rgba(255, 255, 255, 0.12)",
+            boxShadow: "0 20px 40px -15px rgba(0, 0, 0, 0.6), 0 0 25px rgba(139, 92, 246, 0.12)",
+            backdropFilter: "blur(16px)",
           }}
         >
-          <div style={{ display: "flex", alignItems: "center", gap: "10px", color: "#8b5cf6" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: "12px", color: "#a78bfa" }}>
             <div
               style={{
-                width: "40px",
-                height: "40px",
+                width: "42px",
+                height: "42px",
                 borderRadius: "10px",
-                background: "#f5f3ff",
+                background: "rgba(139, 92, 246, 0.15)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
@@ -195,33 +198,34 @@ export default function Analytics() {
             >
               <RiBarChartBoxLine size={22} />
             </div>
-            <span style={{ color: "#64748b", fontSize: "0.9rem", fontWeight: 600 }}>
+            <span style={{ color: "#94a3b8", fontSize: "0.9rem", fontWeight: 600 }}>
               Average per Link
             </span>
           </div>
-          <div style={{ fontSize: "2.2rem", fontWeight: 800, color: "#0f172a", marginTop: "16px" }}>
+          <div style={{ fontSize: "2.4rem", fontWeight: 800, color: "#ffffff", marginTop: "16px" }}>
             {avgClicks}
           </div>
         </motion.div>
 
         <motion.div
-          whileHover={{ y: -4 }}
+          whileHover={{ y: -6, scale: 1.02 }}
           transition={{ duration: 0.2 }}
           style={{
-            background: "#ffffff",
+            background: "linear-gradient(145deg, rgba(30, 41, 59, 0.7) 0%, rgba(15, 23, 42, 0.9) 100%)",
             padding: "24px",
-            borderRadius: "16px",
-            border: "1px solid #e2e8f0",
-            boxShadow: "0 4px 20px rgba(0,0,0,0.04)",
+            borderRadius: "18px",
+            border: "1px solid rgba(255, 255, 255, 0.12)",
+            boxShadow: "0 20px 40px -15px rgba(0, 0, 0, 0.6), 0 0 25px rgba(245, 158, 11, 0.12)",
+            backdropFilter: "blur(16px)",
           }}
         >
-          <div style={{ display: "flex", alignItems: "center", gap: "10px", color: "#f59e0b" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: "12px", color: "#fbbf24" }}>
             <div
               style={{
-                width: "40px",
-                height: "40px",
+                width: "42px",
+                height: "42px",
                 borderRadius: "10px",
-                background: "#fef3c7",
+                background: "rgba(245, 158, 11, 0.15)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
@@ -229,15 +233,15 @@ export default function Analytics() {
             >
               <RiFireLine size={22} />
             </div>
-            <span style={{ color: "#64748b", fontSize: "0.9rem", fontWeight: 600 }}>
+            <span style={{ color: "#94a3b8", fontSize: "0.9rem", fontWeight: 600 }}>
               Top Performer
             </span>
           </div>
           <div
             style={{
-              fontSize: "1.4rem",
+              fontSize: "1.5rem",
               fontWeight: 800,
-              color: "#0f172a",
+              color: "#ffffff",
               marginTop: "16px",
               whiteSpace: "nowrap",
               overflow: "hidden",
@@ -246,8 +250,8 @@ export default function Analytics() {
           >
             {topLink ? `/${topLink.urlId}` : "N/A"}
           </div>
-          <span style={{ fontSize: "0.82rem", color: "#10b981", fontWeight: 600 }}>
-            {topLink ? `${topLink.click || 0} visits recorded` : "No visits yet"}
+          <span style={{ fontSize: "0.85rem", color: "#34d399", fontWeight: 600 }}>
+            {topLink ? `${topLink.click || 0} visits recorded` : "No visits recorded"}
           </span>
         </motion.div>
       </div>
@@ -255,28 +259,29 @@ export default function Analytics() {
       {/* Breakdown Table Card */}
       <div
         style={{
-          background: "#ffffff",
-          borderRadius: "16px",
-          border: "1px solid #e2e8f0",
-          boxShadow: "0 4px 25px rgba(0,0,0,0.05)",
-          padding: "28px",
+          background: "linear-gradient(145deg, rgba(30, 41, 59, 0.7) 0%, rgba(15, 23, 42, 0.9) 100%)",
+          borderRadius: "20px",
+          border: "1px solid rgba(255, 255, 255, 0.12)",
+          boxShadow: "0 25px 60px -15px rgba(0, 0, 0, 0.6), 0 0 30px rgba(37, 99, 235, 0.12)",
+          backdropFilter: "blur(20px)",
+          padding: "32px",
         }}
       >
-        <h3 style={{ margin: "0 0 20px", color: "#0f172a", fontSize: "1.2rem", fontWeight: 700 }}>
+        <h3 style={{ margin: "0 0 20px", color: "#ffffff", fontSize: "1.25rem", fontWeight: 800 }}>
           Link Engagement Breakdown
         </h3>
 
         {isLoading && links.length === 0 ? (
-          <div style={{ textAlign: "center", padding: "40px", color: "#64748b" }}>
+          <div style={{ textAlign: "center", padding: "40px", color: "#94a3b8" }}>
             Loading analytics...
           </div>
         ) : links.length === 0 ? (
-          <div style={{ textAlign: "center", padding: "48px 20px", color: "#64748b" }}>
+          <div style={{ textAlign: "center", padding: "48px 20px", color: "#94a3b8" }}>
             <p style={{ margin: "0 0 12px", fontSize: "1rem" }}>No analytics data yet.</p>
             <Link
               to="/dashboard"
               style={{
-                color: "#2563eb",
+                color: "#38bdf8",
                 fontWeight: 600,
                 textDecoration: "none",
                 fontSize: "0.95rem",
@@ -286,23 +291,23 @@ export default function Analytics() {
             </Link>
           </div>
         ) : (
-          <div style={{ overflowX: "auto", border: "1px solid #e2e8f0", borderRadius: "10px" }}>
+          <div style={{ overflowX: "auto", border: "1px solid rgba(255, 255, 255, 0.1)", borderRadius: "12px", background: "rgba(15, 23, 42, 0.5)" }}>
             <table style={{ width: "100%", borderCollapse: "collapse", textAlign: "left" }}>
               <thead>
-                <tr style={{ background: "#f8fafc", color: "#475569", fontSize: "0.82rem", textTransform: "uppercase", letterSpacing: "0.04em" }}>
-                  <th style={{ padding: "12px 16px", borderBottom: "1px solid #e2e8f0" }}>
+                <tr style={{ background: "rgba(15, 23, 42, 0.85)", color: "#94a3b8", fontSize: "0.82rem", textTransform: "uppercase", letterSpacing: "0.05em" }}>
+                  <th style={{ padding: "14px 16px", borderBottom: "1px solid rgba(255, 255, 255, 0.1)" }}>
                     Short ID
                   </th>
-                  <th style={{ padding: "12px 16px", borderBottom: "1px solid #e2e8f0" }}>
+                  <th style={{ padding: "14px 16px", borderBottom: "1px solid rgba(255, 255, 255, 0.1)" }}>
                     Destination URL
                   </th>
-                  <th style={{ padding: "12px 16px", borderBottom: "1px solid #e2e8f0" }}>
+                  <th style={{ padding: "14px 16px", borderBottom: "1px solid rgba(255, 255, 255, 0.1)" }}>
                     Visits
                   </th>
-                  <th style={{ padding: "12px 16px", borderBottom: "1px solid #e2e8f0" }}>
+                  <th style={{ padding: "14px 16px", borderBottom: "1px solid rgba(255, 255, 255, 0.1)" }}>
                     Engagement Share
                   </th>
-                  <th style={{ padding: "12px 16px", borderBottom: "1px solid #e2e8f0" }}>
+                  <th style={{ padding: "14px 16px", borderBottom: "1px solid rgba(255, 255, 255, 0.1)" }}>
                     Created
                   </th>
                 </tr>
@@ -319,17 +324,17 @@ export default function Analytics() {
                     <tr
                       key={link._id}
                       style={{
-                        borderBottom: "1px solid #f1f5f9",
+                        borderBottom: "1px solid rgba(255, 255, 255, 0.06)",
                         fontSize: "0.9rem",
                       }}
                     >
-                      <td style={{ padding: "14px 16px", fontWeight: 700, color: "#2563eb" }}>
+                      <td style={{ padding: "16px", fontWeight: 700, color: "#38bdf8" }}>
                         <a
                           href={shortUrl}
                           target="_blank"
                           rel="noopener noreferrer"
                           style={{
-                            color: "#2563eb",
+                            color: "#38bdf8",
                             textDecoration: "none",
                             display: "inline-flex",
                             alignItems: "center",
@@ -341,23 +346,23 @@ export default function Analytics() {
                       </td>
                       <td
                         style={{
-                          padding: "14px 16px",
+                          padding: "16px",
                           maxWidth: "320px",
                           whiteSpace: "nowrap",
                           overflow: "hidden",
                           textOverflow: "ellipsis",
-                          color: "#64748b",
+                          color: "#94a3b8",
                         }}
                         title={link.originalUrl}
                       >
                         {link.originalUrl}
                       </td>
-                      <td style={{ padding: "14px 16px" }}>
+                      <td style={{ padding: "16px" }}>
                         <span
                           style={{
-                            background: (link.click || 0) > 0 ? "#ecfdf5" : "#f1f5f9",
-                            color: (link.click || 0) > 0 ? "#059669" : "#64748b",
-                            border: `1px solid ${(link.click || 0) > 0 ? "#a7f3d0" : "#e2e8f0"}`,
+                            background: (link.click || 0) > 0 ? "rgba(16, 185, 129, 0.15)" : "rgba(255, 255, 255, 0.06)",
+                            color: (link.click || 0) > 0 ? "#34d399" : "#94a3b8",
+                            border: `1px solid ${(link.click || 0) > 0 ? "rgba(16, 185, 129, 0.3)" : "rgba(255, 255, 255, 0.1)"}`,
                             padding: "4px 12px",
                             borderRadius: "20px",
                             fontWeight: 700,
@@ -367,12 +372,12 @@ export default function Analytics() {
                           {link.click || 0}
                         </span>
                       </td>
-                      <td style={{ padding: "14px 16px", minWidth: "150px" }}>
+                      <td style={{ padding: "16px", minWidth: "160px" }}>
                         <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
                           <div
                             style={{
                               flex: 1,
-                              background: "#e2e8f0",
+                              background: "rgba(255, 255, 255, 0.08)",
                               height: "8px",
                               borderRadius: "4px",
                               overflow: "hidden",
@@ -387,12 +392,12 @@ export default function Analytics() {
                               }}
                             />
                           </div>
-                          <span style={{ fontSize: "0.82rem", color: "#475569", minWidth: "32px", fontWeight: 600 }}>
+                          <span style={{ fontSize: "0.82rem", color: "#cbd5e1", minWidth: "32px", fontWeight: 600 }}>
                             {percent}%
                           </span>
                         </div>
                       </td>
-                      <td style={{ padding: "14px 16px", color: "#64748b", fontSize: "0.85rem" }}>
+                      <td style={{ padding: "16px", color: "#94a3b8", fontSize: "0.85rem" }}>
                         {formatMongoTimestamp(link.createdAt)}
                       </td>
                     </tr>

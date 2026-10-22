@@ -3,27 +3,32 @@
     justify-content: space-between;
     align-items: center;
     margin-top: 20px;
+    gap: 16px;
+    flex-wrap: wrap;
 }
 
 .inputContainerClass {
-    width: 45%;
+    flex: 1;
+    min-width: 200px;
 }
+
 .divider {
-    font-size: 25px;
-    margin-top: 20px;
-    font-weight: 600;
+    font-size: 26px;
+    margin-top: 14px;
+    font-weight: 700;
+    color: #64748b;
 }
-.shortLink{
+
+.shortLink {
     width: auto;
 }
 
 .domains {
-    background-color: rgb(255, 255, 255);
     outline: none;
     cursor: pointer;
 }
 
 .error {
-    border: 1px solid rgb(236, 43, 43);
-    color: red;
+    border: 1px solid #ef4444 !important;
+    color: #f87171 !important;
 }

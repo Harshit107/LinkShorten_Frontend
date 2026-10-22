@@ -8,6 +8,7 @@ import QRCode from "./QRCode";
 import LinkList from "./LinkList";
 import { AVAILABLE_MODE } from "../../helper/ParamsHelper";
 import { useSearchParams } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function DashboardIndex() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -38,12 +39,34 @@ export default function DashboardIndex() {
         handlePanelChange={handlePanelChange}
         default={selectedOption}
       />
-      {selectedOption === "LINK" && (
-        <ShortLink onLinkCreated={triggerListRefresh} />
-      )}
-      {selectedOption === "QR" && (
-        <QRCode onLinkCreated={triggerListRefresh} />
-      )}
+      <div style={{ width: "100%", display: "flex", justifyContent: "center" }}>
+        <AnimatePresence mode="wait">
+          {selectedOption === "LINK" ? (
+            <motion.div
+              key="link-panel"
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -12 }}
+              transition={{ duration: 0.25 }}
+              style={{ width: "100%" }}
+            >
+              <ShortLink onLinkCreated={triggerListRefresh} />
+            </motion.div>
+          ) : (
+            <motion.div
+              key="qr-panel"
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -12 }}
+              transition={{ duration: 0.25 }}
+              style={{ width: "100%" }}
+            >
+              <QRCode onLinkCreated={triggerListRefresh} />
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+
       <LinkList refreshTrigger={refreshCount} />
       <Footer />
     </div>

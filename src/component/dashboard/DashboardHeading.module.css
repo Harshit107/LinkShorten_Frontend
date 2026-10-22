@@ -3,7 +3,9 @@
     text-align: center;
     display: flex;
     justify-content: center;
-    padding: 40px 20px 20px;
+    padding: 44px 20px 24px;
+    position: relative;
+    z-index: 10;
 }
 
 .content {
@@ -17,35 +19,36 @@
 .badge {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
-    background: #eff6ff;
-    border: 1px solid #bfdbfe;
-    color: #1d4ed8;
-    padding: 5px 14px;
-    border-radius: 20px;
-    font-size: 0.82rem;
+    gap: 8px;
+    background: rgba(37, 99, 235, 0.14);
+    border: 1px solid rgba(56, 189, 248, 0.28);
+    color: #38bdf8;
+    padding: 6px 16px;
+    border-radius: 30px;
+    font-size: 0.85rem;
     font-weight: 600;
-    margin-bottom: 16px;
+    margin-bottom: 18px;
+    backdrop-filter: blur(8px);
 }
 
 .content h1 {
-    font-size: 2.4rem;
-    font-weight: 800;
-    color: #0f172a;
+    font-size: 2.6rem;
+    font-weight: 900;
+    color: #ffffff;
     letter-spacing: -0.035em;
-    margin: 0 0 14px 0;
-    line-height: 1.2;
+    margin: 0 0 16px 0;
+    line-height: 1.15;
 }
 
 .special {
-    background: linear-gradient(135deg, #2563eb 0%, #38bdf8 100%);
+    background: linear-gradient(135deg, #60a5fa 0%, #38bdf8 50%, #34d399 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
 .content p {
-    font-size: 1.05rem;
-    color: #64748b;
+    font-size: 1.1rem;
+    color: #94a3b8;
     line-height: 1.6;
     margin: 0;
     max-width: 640px;

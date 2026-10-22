@@ -1,26 +1,30 @@
 .container {
     display: flex;
     justify-content: flex-start;
-    margin: 24px auto 0;
+    margin: 20px auto 0;
     width: 90%;
     max-width: 900px;
+    position: relative;
+    z-index: 10;
 }
 
 .content {
     display: flex;
     flex-direction: row;
-    gap: 8px;
-    background: #e2e8f0;
-    padding: 4px;
+    gap: 6px;
+    background: rgba(15, 23, 42, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 5px;
     border-radius: 12px;
+    backdrop-filter: blur(16px);
 }
 
 .options {
     padding: 10px 22px;
     border-radius: 8px;
-    border: none;
+    border: 1px solid transparent;
     background-color: transparent;
-    color: #475569;
+    color: #94a3b8;
     font-weight: 600;
     font-size: 0.92rem;
     display: inline-flex;
@@ -31,14 +35,15 @@
 }
 
 .options.active {
-    background-color: #ffffff;
-    color: #2563eb;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    background: linear-gradient(135deg, rgba(37, 99, 235, 0.3) 0%, rgba(56, 189, 248, 0.2) 100%);
+    border-color: rgba(56, 189, 248, 0.4);
+    color: #38bdf8;
+    box-shadow: 0 4px 15px rgba(37, 99, 235, 0.25);
 }
 
 .options:not(.active):hover {
-    color: #0f172a;
-    background-color: rgba(255, 255, 255, 0.4);
+    color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.06);
 }
 
 .title {

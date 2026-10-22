@@ -2,11 +2,15 @@
   width: 90%;
   max-width: 960px;
   margin: 36px auto;
-  background: #ffffff;
-  border-radius: 16px;
-  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.05), 0 0 0 1px #e2e8f0;
-  padding: 28px;
+  background: linear-gradient(145deg, rgba(30, 41, 59, 0.7) 0%, rgba(15, 23, 42, 0.9) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 20px;
+  box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.6), 0 0 30px rgba(37, 99, 235, 0.12);
+  backdrop-filter: blur(20px);
+  padding: 32px;
   box-sizing: border-box;
+  position: relative;
+  z-index: 10;
 }
 
 .header {
@@ -25,13 +29,14 @@
 }
 
 .titleArea h2 {
-  font-size: 1.3rem;
-  font-weight: 700;
-  color: #0f172a;
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: #ffffff;
   margin: 0;
   display: flex;
   align-items: center;
   gap: 8px;
+  letter-spacing: -0.02em;
 }
 
 .statsArea {
@@ -42,17 +47,17 @@
 }
 
 .statBadge {
-  background: #f1f5f9;
-  border: 1px solid #e2e8f0;
+  background: rgba(15, 23, 42, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   padding: 6px 14px;
   border-radius: 20px;
   font-size: 0.85rem;
   font-weight: 500;
-  color: #475569;
+  color: #cbd5e1;
 }
 
 .statBadge strong {
-  color: #2563eb;
+  color: #38bdf8;
   font-weight: 700;
 }
 
@@ -64,30 +69,30 @@
 
 .searchInput {
   flex: 1;
-  background: #f8fafc;
-  border: 1px solid #cbd5e1;
+  background: rgba(15, 23, 42, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 10px;
   padding: 10px 14px;
   font-size: 0.9rem;
-  color: #1e293b;
+  color: #ffffff;
   outline: none;
   transition: all 0.2s ease;
   font-family: inherit;
 }
 
 .searchInput:focus {
-  border-color: #2563eb;
-  background: #ffffff;
-  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+  border-color: #38bdf8;
+  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.25);
+  background: rgba(15, 23, 42, 0.95);
 }
 
 .refreshBtn {
-  background: #f8fafc;
-  border: 1px solid #cbd5e1;
+  background: rgba(15, 23, 42, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 10px;
   padding: 0 16px;
   cursor: pointer;
-  color: #475569;
+  color: #cbd5e1;
   display: inline-flex;
   align-items: center;
   gap: 6px;
@@ -97,15 +102,16 @@
 }
 
 .refreshBtn:hover {
-  background: #f1f5f9;
-  color: #0f172a;
-  border-color: #94a3b8;
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.25);
 }
 
 .tableWrapper {
   overflow-x: auto;
-  border-radius: 10px;
-  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(15, 23, 42, 0.5);
 }
 
 .table {
@@ -116,20 +122,21 @@
 }
 
 .table th {
-  background: #f8fafc;
-  padding: 12px 16px;
-  color: #475569;
+  background: rgba(15, 23, 42, 0.85);
+  padding: 14px 16px;
+  color: #94a3b8;
   font-weight: 600;
   font-size: 0.82rem;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
-  border-bottom: 1px solid #e2e8f0;
+  letter-spacing: 0.05em;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .table td {
   padding: 16px;
-  border-bottom: 1px solid #f1f5f9;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
   vertical-align: middle;
+  color: #e2e8f0;
 }
 
 .table tr:last-child td {
@@ -137,25 +144,25 @@
 }
 
 .table tr:hover {
-  background: #f8fafc;
+  background: rgba(255, 255, 255, 0.03);
 }
 
 .shortUrlCell {
   font-weight: 700;
-  color: #2563eb;
+  color: #38bdf8;
   display: flex;
   align-items: center;
   gap: 8px;
 }
 
 .shortUrlCell a {
-  color: #2563eb;
+  color: #38bdf8;
   text-decoration: none;
   transition: color 0.2s ease;
 }
 
 .shortUrlCell a:hover {
-  color: #1d4ed8;
+  color: #60a5fa;
   text-decoration: underline;
 }
 
@@ -164,27 +171,27 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  color: #64748b;
+  color: #94a3b8;
   font-size: 0.88rem;
 }
 
 .clickBadgeActive {
-  background: #ecfdf5;
-  color: #059669;
-  border: 1px solid #a7f3d0;
+  background: rgba(16, 185, 129, 0.15);
+  color: #34d399;
+  border: 1px solid rgba(16, 185, 129, 0.3);
   padding: 4px 12px;
   border-radius: 20px;
   font-weight: 700;
   font-size: 0.82rem;
   display: inline-flex;
   align-items: center;
-  gap: 4px;
+  gap: 5px;
 }
 
 .clickBadgeZero {
-  background: #f1f5f9;
-  color: #64748b;
-  border: 1px solid #e2e8f0;
+  background: rgba(255, 255, 255, 0.06);
+  color: #94a3b8;
+  border: 1px solid rgba(255, 255, 255, 0.1);
   padding: 4px 12px;
   border-radius: 20px;
   font-weight: 500;
@@ -200,12 +207,12 @@
 }
 
 .actionBtn {
-  background: #ffffff;
-  border: 1px solid #cbd5e1;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 8px;
   padding: 6px 12px;
   cursor: pointer;
-  color: #475569;
+  color: #e2e8f0;
   display: inline-flex;
   align-items: center;
   gap: 5px;
@@ -216,32 +223,32 @@
 }
 
 .actionBtn:hover {
-  background: #f8fafc;
-  border-color: #94a3b8;
-  color: #0f172a;
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.25);
+  color: #ffffff;
 }
 
 .actionBtnCopied {
-  background: #ecfdf5 !important;
-  border-color: #34d399 !important;
-  color: #059669 !important;
+  background: rgba(16, 185, 129, 0.2) !important;
+  border-color: rgba(16, 185, 129, 0.5) !important;
+  color: #34d399 !important;
 }
 
 .deleteBtn {
-  border-color: #fecaca;
-  color: #dc2626;
+  border-color: rgba(239, 68, 68, 0.3);
+  color: #f87171;
 }
 
 .deleteBtn:hover {
-  background: #fef2f2;
-  border-color: #f87171;
-  color: #991b1b;
+  background: rgba(239, 68, 68, 0.15);
+  border-color: rgba(239, 68, 68, 0.5);
+  color: #fca5a5;
 }
 
 .emptyState {
   text-align: center;
   padding: 48px 24px;
-  color: #64748b;
+  color: #94a3b8;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -251,23 +258,23 @@
   width: 56px;
   height: 56px;
   border-radius: 14px;
-  background: #eff6ff;
+  background: rgba(37, 99, 235, 0.15);
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 16px;
-  color: #2563eb;
+  color: #38bdf8;
 }
 
 .emptyState h4 {
-  font-size: 1.1rem;
-  color: #0f172a;
+  font-size: 1.15rem;
+  color: #ffffff;
   margin: 0 0 6px 0;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .emptyState p {
   margin: 0;
-  font-size: 0.9rem;
-  color: #64748b;
+  font-size: 0.92rem;
+  color: #94a3b8;
 }

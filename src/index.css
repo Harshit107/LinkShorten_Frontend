@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
 
 body {
   margin: 0;
@@ -10,8 +10,8 @@ body {
   box-sizing: border-box;
   width: 100%;
   min-height: 100%;
-  background-color: #f8fafc;
-  color: #0f172a;
+  background-color: #090e17;
+  color: #f8fafc;
 }
 
 code {
@@ -21,24 +21,30 @@ code {
 
 html {
   height: 100%;
+  background-color: #090e17;
 }
 
 #root {
   min-height: 100%;
   display: flex;
   flex-direction: column;
+  background-color: #090e17;
 }
 
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 8px;
+  height: 8px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #cbd5e1;
+  background-color: #334155;
   border-radius: 4px;
 }
 
+::-webkit-scrollbar-thumb:hover {
+  background-color: #475569;
+}
+
 ::-webkit-scrollbar-track {
-  background-color: transparent;
+  background-color: #090e17;
 }
