@@ -1,42 +1,65 @@
 const defaultData = {
-    isAuthenticated: false,
-    token: "12"
+  isAuthenticated: false,
+  token: "",
 };
+
 export const initialize = () => {
-    const storedData = localStorage.getItem('data');
+  try {
+    const storedData = localStorage.getItem("data");
     if (!storedData) {
-        setDataToLocalStorage((defaultData));
+      setDataToLocalStorage(defaultData);
     }
-}
+  } catch (err) {
+    console.error("Failed to initialize localStorage:", err);
+  }
+};
 
 export const getDataFromLocalStorage = () => {
-    const data = JSON.parse(localStorage.getItem('data'));
-    if (!data)
-        return defaultData;
-    return data
-}
+  try {
+    const raw = localStorage.getItem("data");
+    if (!raw) return defaultData;
+    const parsed = JSON.parse(raw);
+    return parsed || defaultData;
+  } catch (err) {
+    return defaultData;
+  }
+};
 
 export const setDataToLocalStorage = (data) => {
-    if (!data?.token) {
-        if (getDataFromLocalStorage())
-            data.token = getDataFromLocalStorage().token;
-        else
-            data.token = ""
-    }
-    return window.localStorage.setItem('data', JSON.stringify(data))
-}
+  try {
+    const current = getDataFromLocalStorage();
+    const updated = {
+      ...current,
+      ...data,
+      token: data?.token !== undefined ? data.token : current.token || "",
+      isAuthenticated: Boolean(data?.token || current.token),
+    };
+    window.localStorage.setItem("data", JSON.stringify(updated));
+    return updated;
+  } catch (err) {
+    console.error("Failed to write to localStorage:", err);
+    return null;
+  }
+};
 
 export const getTokenFromLocalStorage = () => {
-    return JSON.parse(localStorage.getItem('data'))?.token;
-}
+  return getDataFromLocalStorage()?.token || "";
+};
 
 export const setTokenToLocalStorage = (token) => {
-    const data = getDataFromLocalStorage();
-    data.token = token;
-    setDataToLocalStorage(data);
+  const data = getDataFromLocalStorage();
+  data.token = token || "";
+  data.isAuthenticated = Boolean(token);
+  setDataToLocalStorage(data);
+};
 
-}
+export const clearLocalStorage = () => {
+  try {
+    window.localStorage.removeItem("data");
+  } catch (err) {
+    console.error("Failed to clear localStorage:", err);
+  }
+};
 
-export const clearLoacalstorage = () => {
-    window.localStorage.removeItem('data');
- }
+// Backward-compatibility alias for legacy typo
+export const clearLoacalstorage = clearLocalStorage;

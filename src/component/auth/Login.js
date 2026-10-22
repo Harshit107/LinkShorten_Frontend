@@ -6,70 +6,87 @@ import { useNavigate } from "react-router-dom";
 import { useServer } from "../../hooks/useServer";
 import { USER_AUTH } from "../../config";
 import { setTokenToLocalStorage } from "../../helper/LocalStorage";
+import { RiAlertLine } from "react-icons/ri";
 
 export const Login = (props) => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const { handleAPICall } = useServer();
+  const { handleAPICall, error, isLoading } = useServer();
 
   const handleUserLoginAuth = async () => {
-    const body = { email, password };
-    const data = await handleAPICall(USER_AUTH, "POST", body);
-    if (data) {
-      
-      setTokenToLocalStorage(data.token);
+    if (!email || !password) return;
+    const body = { email: email.trim(), password };
+    const result = await handleAPICall(USER_AUTH, "POST", body);
+
+    if (result && result.token) {
+      setTokenToLocalStorage(result.token);
       navigate("/dashboard");
     }
   };
 
   const submitFormHandler = (event) => {
     event.preventDefault();
-    console.log(email, password);
     handleUserLoginAuth();
-  };
-
-  const handleEmailChange = (e) => {
-    setEmail(e.target.value);
-  };
-
-  const handlePasswordChange = (e) => {
-    setPassword(e.target.value);
   };
 
   return (
     <div className={styles["form-container"]}>
-      <h2>Login</h2>
-      <form className={styles["login-form"]}>
+      <h2 className={styles["form-title"]}>Welcome Back</h2>
+      <p className={styles["form-subtitle"]}>
+        Log in to access your shortened links, custom aliases, and analytics
+      </p>
+
+      {error && (
+        <div className={styles["alert-error"]}>
+          <RiAlertLine size={18} style={{ flexShrink: 0 }} />
+          <span>{error.message}</span>
+        </div>
+      )}
+
+      <form className={styles["login-form"]} onSubmit={submitFormHandler}>
         <Input
-          label={"Your email"}
+          label={"Email Address"}
           id={"email"}
-          placeholder={"someone@example.com"}
+          type={"email"}
+          placeholder={"you@example.com"}
           value={email}
-          onChange={handleEmailChange}
+          onChange={(e) => setEmail(e.target.value)}
+          required
         />
         <Input
-          label={"Your password"}
+          label={"Password"}
+          id={"password"}
           type={"password"}
-          placeholder={"**********"}
+          placeholder={"••••••••"}
           value={password}
-          onChange={handlePasswordChange}
+          onChange={(e) => setPassword(e.target.value)}
+          required
         />
 
         <Button
           type="submit"
-          action={{ onClick: submitFormHandler }}
-          name="Login"
+          className={styles["submit-btn"]}
+          action={{
+            onClick: submitFormHandler,
+            disabled: !email || !password || isLoading,
+          }}
+          name={isLoading ? "Signing in..." : "Sign In to Dashboard"}
         >
-          Log In
+          {isLoading ? "Signing in..." : "Sign In to Dashboard"}
         </Button>
       </form>
-      <p
-        className={styles["link-btn"]}
-        onClick={() => props.onFormSubmission("register")}
-      >
-        Don't have an account? Register here!
+
+      <p className={styles["toggle-prompt"]}>
+        Don't have an account yet?
+        <button
+          type="button"
+          className={styles["toggle-link-btn"]}
+          onClick={() => props.onFormSubmission("register")}
+        >
+          Create account
+        </button>
       </p>
     </div>
   );

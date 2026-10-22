@@ -1,18 +1,32 @@
+const getApiBaseUrl = () => {
+  if (process.env.REACT_APP_API_URL) {
+    return process.env.REACT_APP_API_URL.endsWith("/")
+      ? process.env.REACT_APP_API_URL
+      : `${process.env.REACT_APP_API_URL}/`;
+  }
+  if (typeof window !== "undefined" && window.location.hostname === "localhost") {
+    return "http://localhost:3000/";
+  }
+  return "https://trimurl.online/";
+};
+
+export const API_BASE_URL = getApiBaseUrl();
+
 export const defaultSetting = {
   name: "TrimURL",
-  domain: "https://trimURL.online/",
-  supportedDomains: ["TrimUrl.online"],
+  domain: API_BASE_URL,
+  supportedDomains: ["TrimUrl.online", "localhost:3000"],
   supportEmail: ["contact@trimurl.online"],
   replyEmail: ["support@trimurl.online"],
 };
 
-const DEV_URL = "https://trimurl.online/";
-// const PROD_URL = 'https://trimurl.online/'
-
-const url = DEV_URL;
-
-export const CREATE_LINK_API = url + "user";
-export const GET_ALL_LINK_API = url + "user";
-export const CHECK_LOGIN = url + "accounts/dashboard";
-export const USER_AUTH = url + "accounts/login";
-export const USER_REGISTER = url + "accounts/register";
+// API Endpoints (Standardized v1 REST Routes)
+export const CREATE_LINK_API = `${API_BASE_URL}api/v1/links`;
+export const GET_ALL_LINK_API = `${API_BASE_URL}api/v1/links`;
+export const CHECK_LOGIN = `${API_BASE_URL}api/v1/auth/dashboard`;
+export const USER_AUTH = `${API_BASE_URL}api/v1/auth/login`;
+export const USER_REGISTER = `${API_BASE_URL}api/v1/auth/register`;
+export const PROFILE_API = `${API_BASE_URL}api/v1/auth/profile`;
+export const LOGOUT_API = `${API_BASE_URL}api/v1/auth/logout`;
+export const FORGET_PASSWORD_API = `${API_BASE_URL}api/v1/auth/forget/password`;
+export const UPDATE_PASSWORD_API = `${API_BASE_URL}api/v1/auth/update/password`;
