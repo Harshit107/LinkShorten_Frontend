@@ -5,15 +5,21 @@ import Auth from "./pages/Auth";
 import Api from "./pages/api";
 import Analytics from "./pages/analytics";
 import Homepage from "./pages/homepage";
+import ProtectedRoute from "./component/common/ProtectedRoute";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Root />,
     children: [
-      { path: "dashboard", element: <Dashboard /> },
-      { path: "api", element: <Api /> },
-      { path: "analytics", element: <Analytics /> },
+      {
+        element: <ProtectedRoute />,
+        children: [
+          { path: "dashboard", element: <Dashboard /> },
+          { path: "api", element: <Api /> },
+          { path: "analytics", element: <Analytics /> },
+        ],
+      },
     ],
   },
   { path: "", index: true, element: <Homepage /> },
